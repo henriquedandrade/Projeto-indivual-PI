@@ -86,3 +86,61 @@ body {
 .agora{
     font-weight: 600;   
 }
+
+
+
+/* Tela de cadastro e login */
+
+.main_img{
+    background-image: url(../ASSETS/visaoestadio.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    background-color: rgb(255, 255, 255, 0.3);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    background-color: rgb(255, 255, 255);
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}
+
+.input{
+    height: 40px;
+    width: 60%;
+    background-color: #519074;
+}
+
+.button{
+    height: 40px;
+    width: 30%;
+    border-radius: 50px;
+    border: 0px;
+    background-color: #516B90;
+    font-weight: 500;
+    font-size: 16px;
+}
+.imagem_log_cadas{
+    height: 100vh;
+}
