@@ -182,12 +182,35 @@ body {
     font-size: 16px;
     transition: 0.3s ease;
 }
+
+.voltar{
+    height: 15px;
+    width: 15px;
+    border-radius: 100px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 5px;
+    margin-left: 366px;
+    padding: 0;    
+    text-decoration: none;
+}
+
+.voltar:hover{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: 3px solid black;
+    cursor: pointer;    
+}
+
 button:hover{
     color: rgb(0, 0, 0);
     background-color: #ffffff;
     border: 3px solid black;
-    cursor: pointer;
-    
+    cursor: pointer;    
 }
 
 .imagem_log_cadas{
@@ -198,7 +221,7 @@ button:hover{
     font-weight: 800;
     font-size: 36px;
     font-family:"Roboto";   
-    margin-top: 3rem;
+    margin-top: 1.5rem;
 }
 
 .span{
