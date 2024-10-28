@@ -97,10 +97,10 @@ body{
 .voltar{
     height: 15px;
     width: 15px;
-    border-radius: 100px;
+    border-radius: 50%;
     color: white;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 800;
     display: flex;
     justify-content: center;
     align-items:center;
