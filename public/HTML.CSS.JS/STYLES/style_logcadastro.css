@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/* Tela de cadastro e login */
+body{
+    margin: 0;
+}
+
+.main_img{
+    background-image: url(../ASSETS/visaoestadio.jpg);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main{
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container{
+    background-color: rgb(255, 255, 255);
+    width: 400px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.boxs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.box_inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    width: 80%;
+    height: 45vh;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.input{
+    border: 0px;
+    font-family:'Segoe UI'; 
+    font-family:"Roboto" ;   
+    height: 40px;
+    width: 90%;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 700;
+    outline: none;
+}
+
+.input::placeholder{
+    color: black;
+    opacity: 1;    
+    border: 0px;
+}
+
+.icons{
+    height: 35px;
+    padding: 0;
+}
+
+.button{
+    font-family:"Roboto" ;   
+
+    height: 40px;
+    width: 30%;
+    border-radius: 50px;
+    border: 3px solid black;
+    background-color: #000000;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s ease;
+}
+
+.voltar{
+    height: 15px;
+    width: 15px;
+    border-radius: 100px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-top: 5px;
+    margin-left: 366px;
+    padding: 0;    
+    text-decoration: none;
+}
+
+.voltar:hover{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: 3px solid black;
+    cursor: pointer;    
+}
+
+button:hover{
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: 3px solid black;
+    cursor: pointer;    
+}
+
+.imagem_log_cadas{
+    height: 100vh;
+}
+
+.titulo{
+    font-weight: 800;
+    font-size: 36px;
+    font-family:"Roboto";   
+    margin-top: 1.5rem;
+}
+
+.span{
+    font-family:"Roboto";
+    font-size: 18px;
+}
+
+.forgot_password{
+    font-size: 14px;
+}
+
+.span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.a_button{
+    padding: 0;
+    margin: 0;
+    color: black;    
+    margin-top: 1rem;
+}
