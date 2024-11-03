@@ -36,6 +36,7 @@ body{
 .boxs{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
 }
@@ -45,12 +46,13 @@ body{
     flex-direction: column;
     text-align: right;
     width: 80%;
-    height: 45vh;
+    height: 50vh;
+    
 }
 
 .login .box_inputs{
-    height: 35vh;
-    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -94,7 +96,7 @@ body{
 }
 
 .validacoes .texto_login{
-    display: flex;
+    display: none;
     width: 100%;
     margin-top: 3rem;
     justify-content: center;
@@ -122,15 +124,15 @@ body{
     align-items: center;
     justify-content: center;
     margin-right: 5px;
-  }
+}
 
-  .icone-validação::before {
+.icone-validação::before {
     content: "✓";
     font-size: 10px; 
     color: #ffffff;
     font-weight: 1000;
     margin-bottom: 1px;
-  }
+}
 
 
 .button{
@@ -185,7 +187,6 @@ button:hover{
     font-weight: 800;
     font-size: 36px;
     font-family:"Roboto";   
-    margin-top: 1.5rem;
 }
 
 .span{
@@ -206,7 +207,6 @@ button:hover{
     padding: 0;
     margin: 0;
     color: black;    
-    margin-top: 1rem;
     margin-bottom: 1rem;
     text-decoration: none;
 }
