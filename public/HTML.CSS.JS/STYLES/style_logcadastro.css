@@ -147,6 +147,7 @@ body{
     font-weight: 600;
     font-size: 16px;
     transition: 0.3s ease;
+    margin-bottom: 1rem;
 }
 
 .voltar{

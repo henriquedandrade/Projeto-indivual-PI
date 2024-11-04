@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
 
     <title>FutMarket</title>
 </head>
+
 <body>
     <div class="main sistema">
         <div class="container sistema">
@@ -20,9 +22,12 @@
                 </div>
 
                 <div class="opcoes">
-                    <a href="" class="text opcoes_text">Dashboard</a>
-                    <a href="" class="text opcoes_text">Notícias</a>
-                    <a href="" class="text opcoes_text">Tranfêrencias</a>
+                    <a onclick="opcao_escolhida('dashboard_opcao')" class="text opcoes_text"
+                        id="dashboard_opcao">Dashboard</a>
+                    <a onclick="opcao_escolhida('noticias_opcao')" class="text opcoes_text"
+                        id="noticias_opcao">Notícias</a>
+                    <a onclick="opcao_escolhida('transferencias_opcao')" class="text opcoes_text"
+                        id="transferencias_opcao">Tranfêrencias</a>
                 </div>
                 <img src="../ASSETS/img_menu_lateral.png" alt="" width="100%" style="margin-top: 4rem;">
 
@@ -36,6 +41,28 @@
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
+
+<script>
+    opcao_escolhida("dashboard_opcao");
+
+    function opcao_escolhida(escolhido) {
+        sessoes = ["dashboard_opcao", "noticias_opcao", "transferencias_opcao"];
+
+        var tamanho = sessoes.length;
+
+        for (var contador = 0; contador < tamanho; contador++) {
+            var selecionado = sessoes[contador];
+            var opcao = document.getElementById(selecionado);
+
+            if (selecionado == escolhido) {
+                opcao.style.fontWeight = "bold";
+            } else {
+                opcao.style.fontWeight = "normal";
+            }
+        }
+    }
+</script>

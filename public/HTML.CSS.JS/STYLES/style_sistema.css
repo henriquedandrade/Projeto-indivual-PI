@@ -100,3 +100,7 @@ body{
     width: 80%;
     border-bottom: 2px white solid;
 }
+
+a{
+    cursor: pointer;
+}
