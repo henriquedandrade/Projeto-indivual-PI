@@ -36,8 +36,25 @@
                     <a href="login.html" id="btn-sair" class="button sair">Sair</a>
                 </div>
             </div>
-            <div class="box telas">
+            <div class="box telas" id="telas">
+                <span class="titulos" id="titulos"></span>
+                <div class="conteudo" id="conteudo">
+                    <div class="card">
+                        <div class="cards_inputs1">
+                            <input type="text" id="ipt_posicao" class="input_transferencias posicao" placeholder="Posição">
+                            
+                            <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
 
+                            <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Data de Nascimento">
+
+                            <input type="text" id="ipt_bandeira" class="input_transferencias bandeira" placeholder="Bandeira">
+
+                            <input type="text" id="ipt_nacionalidade" class="input_transferencias nacionalidade" placeholder="Nacionalidade">
+                        </div>
+                    </div>
+                    <a id="btn-publicar" class="button publicar">Publicar</a>                   
+
+                </div>
             </div>
         </div>
     </div>
@@ -47,8 +64,7 @@
 </html>
 
 <script>
-    opcao_escolhida("dashboard_opcao");
-
+    opcao_escolhida("dashboard_opcao"); 
     function opcao_escolhida(escolhido) {
         sessoes = ["dashboard_opcao", "noticias_opcao", "transferencias_opcao"];
 
@@ -60,9 +76,42 @@
 
             if (selecionado == escolhido) {
                 opcao.style.fontWeight = "bold";
+
+                if( escolhido == "dashboard_opcao"){
+                    conteudo_dashboard();
+                } else if( escolhido == "noticias_opcao"){
+                    conteudo_noticias();
+                } else if( escolhido == "transferencias_opcao"){
+                    conteudo_transferencias();
+                }
             } else {
                 opcao.style.fontWeight = "normal";
             }
         }
     }
+
+    function conteudo_dashboard(){
+        var div_principal = document.getElementById('conteudo')
+        titulos.innerHTML = `DASHBOARD`;
+
+    }
+
+
+    function conteudo_noticias(){
+        var div_principal = document.getElementById('conteudo')
+        titulos.innerHTML = `PUBLICAR NOTÍCIA`;
+    }
+
+    function conteudo_transferencias(){
+        var div_principal = document.getElementById('conteudo')
+        titulos.innerHTML = `PUBLICAR TRANSFÊRENCIA`;   
+        
+        div_principal.innerHTML = `<div class="card">
+
+                    </div>
+                    <a id="btn-publicar" class="button publicar">Publicar</a>
+                    `;
+    }
+
+
 </script>
