@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style_logcadastro.css">
     <script src="js/script.js" defer></script>
+    <script src="js/sessao.js"></script>
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
 
     <title>Login</title>
@@ -43,7 +44,7 @@
                     </div>
 
     
-                    <button onclick="" class="button logar">Logar</button>
+                    <button onclick="entrar()" class="button logar">Logar</button>
                     
                     <a href="cadastro.html" class="a_button">
                         <span class="span minha_conta">Quero criar minha conta</span>
@@ -56,3 +57,65 @@
     </div>
 </body>
 </html>
+<script>
+    function entrar() {
+        // aguardar();
+
+        var emailVar = ipt_user.value;
+        var senhaVar = ipt_password.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            console.log('Nao preencheu')
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(() => {
+                    window.location = "dashboard.html";
+                    }, "2000"); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>
