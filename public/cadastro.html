@@ -34,7 +34,7 @@
 
               <img src="assets/user_icon.png" alt="User icon" class="icons">
 
-              <input type="text" id="ipt_email" class="input email" placeholder="E-mail">
+              <input oninput="validacao_email()" type="text" id="ipt_email" class="input email" placeholder="E-mail">
             </div>
 
             <div class="box password">
@@ -53,22 +53,7 @@
             </div>
 
             <div class="validacoes" id="validacoes">
-              <div class="texto_cadastro" id="box_cadastro">
-                <span>Senha deve conter:</span>
-                <div class="check">
-                  <div class="icone-validação" id="valid_MaiMinus"></div><span>Letra maiúscula e minúscula</span>
-                </div>
-                <div class="check">
-                  <div class="icone-validação" id="valid_caractere"></div><span>Caractere especial como: @, #, %, & ou
-                    $</span>
-                </div>
-                <div class="check">
-                  <div class="icone-validação" id="valid_numero"></div><span>Número</span>
-                </div>
-                <div class="check">
-                  <div class="icone-validação" id="valid_qtd"></div><span>De 8 a 16 caracteres</span>
-                </div>
-              </div>
+              
             </div>
           </div>
 
@@ -91,8 +76,6 @@
 <script>
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   function cadastrar() {
-    // aguardar();
-
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = ipt_user.value;
@@ -113,8 +96,14 @@
       return false;
     }
 
-    if (validacao_total != true){
+    if (validacao_senhaa != true){
         errorTexto = "Cumprir requisitos";
+        erros(errorTexto)
+        return false;
+    }
+
+    if (validacao_emaill != true){
+        errorTexto = "Cumprir requisitos email";
         erros(errorTexto)
         return false;
     }
