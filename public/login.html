@@ -37,8 +37,8 @@
                         <span class="span forgot_password" onclick="">Esqueceu a senha?</span>
 
                         <div class="validacoes">
-                            <div class="texto_login">
-                                <span>Usuário ou senha incorreto.</span>
+                            <div class="texto_login" id="texto_login">
+                                <span>Email e/ou senha inválido(s)</span>
                             </div>
                         </div>
                     </div>
@@ -63,6 +63,7 @@
 
         var emailVar = ipt_user.value;
         var senhaVar = ipt_password.value;
+        var alerta_login = document.getElementById("texto_login");
 
         if (emailVar == "" || senhaVar == "") {
             console.log('Nao preencheu')
@@ -96,19 +97,14 @@
                     sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(() => {
+                    alerta_login.style.display = "none";
                     window.location = "dashboard.html";
-                    }, "2000"); // apenas para exibir o loading
+                    }, "1000"); // apenas para exibir o loading
 
                 });
 
             } else {
-
-                console.log("Houve um erro ao tentar realizar o login!");
-
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    finalizarAguardar(texto);
-                });
+                    alerta_login.style.display = "flex";
             }
 
         }).catch(function (erro) {
