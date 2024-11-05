@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/style_logcadastro.css">
-    <script src="../JAVASCRIPT/script.js" defer></script>
-    <link rel="icon" href="../ASSETS/favicon.ico" type="Icon pag">
+    <link rel="stylesheet" href="../css/style_logcadastro.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/sessao.js"></script>
+    <link rel="icon" href="../public/assets/favicon.ico" type="Icon pag">
+
 
     <title>Cadastrar-se</title>
 </head>
@@ -66,7 +68,7 @@
                         </div>
                     </div>
     
-                    <button onclick="" class="button cadastrar">Cadastrar-se</button>
+                    <button onclick="cadastrar()" class="button cadastrar">Cadastrar-se</button>
     
                     <a href="login.html" class="a_button">
                         <span class="span tenho_conta">Já tenho uma conta</span>
@@ -79,3 +81,69 @@
     </div>
 </body>
 </html>
+
+<script>
+
+    // Array para armazenar empresas cadastradas para validação de código de ativação 
+    function cadastrar() {
+      // aguardar();
+  
+      //Recupere o valor da nova input pelo nome do id
+      // Agora vá para o método fetch logo abaixo
+      var nomeVar = ipt_user.value;
+      var emailVar = ipt_email.value;
+      var senhaVar = ipt_password.value;
+      var confirmacaoSenhaVar = ipt_check_password.value;
+  
+      // Verificando se há algum campo em branco
+      if (
+        nomeVar == "" ||
+        emailVar == "" ||
+        senhaVar == "" ||
+        confirmacaoSenhaVar == ""
+      ) {
+  
+        finalizarAguardar();
+        return false;
+      } 
+  
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar
+        }),
+      })
+        .then(function (resposta) {
+          console.log("resposta: ", resposta);
+  
+          if (resposta.ok) {
+  
+            // mensagem_erro.innerHTML =
+            //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+  
+            setTimeout(() => {
+              window.location = "login.html";
+            }, "2000");
+  
+            limparFormulario();
+            finalizarAguardar();
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          finalizarAguardar();
+        });
+  
+      return false;
+    }
+  </script>
