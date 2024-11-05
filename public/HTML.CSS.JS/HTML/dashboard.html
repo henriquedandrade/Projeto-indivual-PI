@@ -39,19 +39,7 @@
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
                 <div class="conteudo" id="conteudo">
-                    <div class="card">
-                        <div class="cards_inputs1">
-                            <input type="text" id="ipt_posicao" class="input_transferencias posicao" placeholder="Posição">
-                            
-                            <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
-
-                            <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Data de Nascimento">
-
-                            <input type="text" id="ipt_bandeira" class="input_transferencias bandeira" placeholder="Bandeira">
-
-                            <input type="text" id="ipt_nacionalidade" class="input_transferencias nacionalidade" placeholder="Nacionalidade">
-                        </div>
-                    </div>
+                    
                     <a id="btn-publicar" class="button publicar">Publicar</a>                   
 
                 </div>
@@ -93,6 +81,8 @@
     function conteudo_dashboard(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `DASHBOARD`;
+        div_principal.innerHTML = ``;
+        
 
     }
 
@@ -100,6 +90,7 @@
     function conteudo_noticias(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `PUBLICAR NOTÍCIA`;
+        div_principal.innerHTML = ``;
     }
 
     function conteudo_transferencias(){
@@ -107,10 +98,34 @@
         titulos.innerHTML = `PUBLICAR TRANSFÊRENCIA`;   
         
         div_principal.innerHTML = `<div class="card">
+                        <div class="cards_inputs1">
 
-                    </div>
-                    <a id="btn-publicar" class="button publicar">Publicar</a>
-                    `;
+                            <select id="slt_posicao" class="input_transferencias posicao">
+                                <option value="#" selected disabled>Posição</option>
+                                <option value="Goleiro">Goleiro</option>
+                                <option value="Zagueiro">Zagueiro</option>
+                                <option value="L.   Direito">Lateral Direito</option>
+                                <option value="L.Esquerdo">Lateral Esquerdo</option>
+                                <option value="Volante">Volante</option>
+                                <option value="Meio-campista">Meio-campista</option>
+                                <option value="M.Ofensivo">Meia Ofensivo</option>
+                                <option value="Atacante">Atacante</option>
+                                <option value="P.Direita">Ponta Direita</option>
+                                <option value="P.Esquerda">Ponta Esquerda</option>
+                                <option value="Centroavante">Centroavante</option>
+                            </select>
+                            
+                            <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
+                            
+                            <div class="tres_divs">
+                                <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Dt. de Nasc.">
+    
+                                <input type="text" id="ipt_bandeira" class="input_transferencias bandeira" placeholder="Bandeira">
+    
+                                <input type="text" id="ipt_nacionalidade" class="input_transferencias nacionalidade" placeholder="Nacionalidade">
+                            </div>
+                        </div>
+                    </div>`;
     }
 
 
