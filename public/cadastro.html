@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/style_logcadastro.css">
+    <link rel="stylesheet" href="css/style_logcadastro.css">
     <script src="js/script.js" defer></script>
     <script src="js/sessao.js"></script>
     <link rel="icon" href="../public/assets/favicon.ico" type="Icon pag">
@@ -23,28 +23,28 @@
                     <div class="box_inputs">
                         <div class="box username">
 
-                            <img src="../ASSETS/user_icon.png" alt="User icon" class="icons">
+                            <img src="assets/user_icon.png" alt="User icon" class="icons">
 
                             <input type="text" id="ipt_user" class="input username"  placeholder="Username">
                         </div>
 
                         <div class="box email">
 
-                            <img src="../ASSETS/user_icon.png" alt="User icon" class="icons">
+                            <img src="assets/user_icon.png" alt="User icon" class="icons">
 
                             <input type="text" id="ipt_email" class="input email"  placeholder="E-mail">
                         </div>
                         
                         <div class="box password"> 
 
-                            <img class="icons" src="../ASSETS/lock_icon.png" alt="password icon">
+                            <img class="icons" src="assets/lock_icon.png" alt="password icon">
 
-                            <input type="password" id="ipt_password" class="input password" placeholder="Password">     
+                            <input oninput="validacao_senha()" type="password" id="ipt_password" class="input password" placeholder="Password">     
                         </div>
 
                         <div class="box chech_password"> 
 
-                            <img class="icons" src="../ASSETS/lock_icon.png" alt="password icon">
+                            <img class="icons" src="assets/lock_icon.png" alt="password icon">
 
                             <input type="password" id="ipt_check_password" class="input check_password" placeholder="Check password">     
                         </div>
@@ -53,16 +53,16 @@
                             <div class="texto_cadastro">
                                 <span>Senha deve conter:</span>
                                 <div class="check">
-                                    <div class="icone-validação"></div><span>Letra maiúscula e minúscula</span>
+                                    <div class="icone-validação" id="valid_MaiMinus"></div><span>Letra maiúscula e minúscula</span>
                                 </div>
                                 <div class="check">
-                                    <div class="icone-validação"></div><span>Caractere especial como: @, #, %, & ou $</span>
+                                    <div class="icone-validação" id="valid_caractere"></div><span>Caractere especial como: @, #, %, & ou $</span>
                                 </div>
                                 <div class="check">
-                                    <div class="icone-validação"></div><span>Número</span>
+                                    <div class="icone-validação" id="valid_numero"></div><span>Número</span>
                                 </div>
                                 <div class="check">
-                                    <div class="icone-validação"></div><span>De 8 a 16 caracteres</span>
+                                    <div class="icone-validação" id="valid_qtd"></div><span>De 8 a 16 caracteres</span>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                     </a>    
                 </div>    
             </div>
-            <img src="../ASSETS/Logo tudo branco.png" alt="Logo" width="180px" style="margin-top: 5px;">
+            <img src="assets/Logo tudo branco.png" alt="Logo" width="180px" style="margin-top: 5px;">
 
         </div>
     </div>
