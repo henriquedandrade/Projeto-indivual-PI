@@ -90,7 +90,7 @@ body{
 .validacoes{
     font-family:"Roboto" ;   
     width: 100%;
-    height: 30px;
+    height: 100px;
     display: flex;
     font-size: 14px;
 }

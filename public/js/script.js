@@ -1,4 +1,7 @@
+var validacao_total = false;
 function validacao_senha(){
+    inserirtexto()
+              
     var senha = ipt_password.value;
     var tamanho = senha.length;
     var validos = "!@#$%&?";
@@ -6,6 +9,7 @@ function validacao_senha(){
     var num = false;
     var min = false;
     var max = false;
+    var tam = false;
 
     // Valida tamanho
     var icone_qtd = document.getElementById("valid_qtd");
@@ -13,6 +17,7 @@ function validacao_senha(){
         icone_qtd.style.backgroundColor = 'black';
     } else {
         icone_qtd.style.backgroundColor = '#35bd40';
+      tam=true;
     }
 
     // Valida caracteres especiais, numeros, Maiuscula e minuscula
@@ -56,4 +61,57 @@ function validacao_senha(){
     } else {
         icone_MaiMinus.style.backgroundColor = 'black';
     }
+
+    if( min && max && esp && num && min && max && tam && esp){
+      console.log('Passei aq')
+      validacao_total = true;
+    }
+    
+}
+
+function inserirtexto(){
+  var div = document.getElementById("validacoes");
+
+  div.innerHTML =`<div class="texto_cadastro" id="box_cadastro">
+               <span>Senha deve conter:</span>
+               <div class="check">
+                 <div class="icone-validação" id="valid_MaiMinus"></div><span>Letra maiúscula e minúscula</span>
+               </div>
+               <div class="check">
+                 <div class="icone-validação" id="valid_caractere"></div><span>Caractere especial como: @, #, %, & ou
+                   $</span>
+               </div>
+               <div class="check">
+                 <div class="icone-validação" id="valid_numero"></div><span>Número</span>
+               </div>
+               <div class="check">
+                 <div class="icone-validação" id="valid_qtd"></div><span>De 8 a 16 caracteres</span>
+               </div>
+             </div>`;
+}
+
+function erros(erro){
+   var div = document.getElementById("box_cadastro");
+
+  if(erro == "Algum não preenchido" ){
+    div.innerHTML = `<span>Preencha todos os campos</span>`    
+
+  }
+  if(erro == "Senhas Diferentes"){
+    div.innerHTML = `<span>As senhas devem ser iguais</span>`    
+  }
+
+  if(erro == "Cumprir requisitos"){
+    div.innerHTML = `<span>A senha deve cumprir com os requisitos</span>`    
+  }
+}
+
+function etapas(texto){
+  var div = document.getElementById("validacoes");
+
+  if( texto == "Cadastrado"){
+    div.innerHTML = `<div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                       <span>Cadastrado com sucesso!</span>
+                     </div>`    
+  }
 }

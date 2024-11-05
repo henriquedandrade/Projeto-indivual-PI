@@ -1,149 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style_logcadastro.css">
-    <script src="js/script.js" defer></script>
-    <script src="js/sessao.js"></script>
-    <link rel="icon" href="../public/assets/favicon.ico" type="Icon pag">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style_logcadastro.css">
+  <script src="js/script.js" defer></script>
+  <script src="js/sessao.js"></script>
+  <link rel="icon" href="../public/assets/favicon.ico" type="Icon pag">
 
 
-    <title>Cadastrar-se</title>
+  <title>Cadastrar-se</title>
 </head>
+
 <body>
-    <div class="main_img cadastro">
-        <div class="main cadastro">
-            <div class="container cadastro">
-                <div class="boxs cadastro">   
-                    <a href="index.html" class="button voltar">X</a>
+  <div class="main_img cadastro">
+    <div class="main cadastro">
+      <div class="container cadastro">
+        <div class="boxs cadastro">
+          <a href="index.html" class="button voltar">X</a>
 
-                    <span class="titulo">CADASTRO</span>
-                    
-                    <div class="box_inputs">
-                        <div class="box username">
+          <span class="titulo">CADASTRO</span>
 
-                            <img src="assets/user_icon.png" alt="User icon" class="icons">
+          <div class="box_inputs">
+            <div class="box username">
 
-                            <input type="text" id="ipt_user" class="input username"  placeholder="Username">
-                        </div>
+              <img src="assets/user_icon.png" alt="User icon" class="icons">
 
-                        <div class="box email">
-
-                            <img src="assets/user_icon.png" alt="User icon" class="icons">
-
-                            <input type="text" id="ipt_email" class="input email"  placeholder="E-mail">
-                        </div>
-                        
-                        <div class="box password"> 
-
-                            <img class="icons" src="assets/lock_icon.png" alt="password icon">
-
-                            <input oninput="validacao_senha()" type="password" id="ipt_password" class="input password" placeholder="Password">     
-                        </div>
-
-                        <div class="box chech_password"> 
-
-                            <img class="icons" src="assets/lock_icon.png" alt="password icon">
-
-                            <input type="password" id="ipt_check_password" class="input check_password" placeholder="Check password">     
-                        </div>
-
-                        <div class="validacoes">
-                            <div class="texto_cadastro">
-                                <span>Senha deve conter:</span>
-                                <div class="check">
-                                    <div class="icone-validação" id="valid_MaiMinus"></div><span>Letra maiúscula e minúscula</span>
-                                </div>
-                                <div class="check">
-                                    <div class="icone-validação" id="valid_caractere"></div><span>Caractere especial como: @, #, %, & ou $</span>
-                                </div>
-                                <div class="check">
-                                    <div class="icone-validação" id="valid_numero"></div><span>Número</span>
-                                </div>
-                                <div class="check">
-                                    <div class="icone-validação" id="valid_qtd"></div><span>De 8 a 16 caracteres</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <button onclick="cadastrar()" class="button cadastrar">Cadastrar-se</button>
-    
-                    <a href="login.html" class="a_button">
-                        <span class="span tenho_conta">Já tenho uma conta</span>
-                    </a>    
-                </div>    
+              <input type="text" id="ipt_user" class="input username" placeholder="Username">
             </div>
-            <img src="assets/Logo tudo branco.png" alt="Logo" width="180px" style="margin-top: 5px;">
 
+            <div class="box email">
+
+              <img src="assets/user_icon.png" alt="User icon" class="icons">
+
+              <input type="text" id="ipt_email" class="input email" placeholder="E-mail">
+            </div>
+
+            <div class="box password">
+
+              <img class="icons" src="assets/lock_icon.png" alt="password icon">
+
+              <input oninput="validacao_senha()" type="password" id="ipt_password" class="input password"
+                placeholder="Password">
+            </div>
+
+            <div class="box chech_password">
+
+              <img class="icons" src="assets/lock_icon.png" alt="password icon">
+
+              <input  oninput="validacao_senha()" type="password" id="ipt_check_password" class="input check_password" placeholder="Check password">
+            </div>
+
+            <div class="validacoes" id="validacoes">
+              <div class="texto_cadastro" id="box_cadastro">
+                <span>Senha deve conter:</span>
+                <div class="check">
+                  <div class="icone-validação" id="valid_MaiMinus"></div><span>Letra maiúscula e minúscula</span>
+                </div>
+                <div class="check">
+                  <div class="icone-validação" id="valid_caractere"></div><span>Caractere especial como: @, #, %, & ou
+                    $</span>
+                </div>
+                <div class="check">
+                  <div class="icone-validação" id="valid_numero"></div><span>Número</span>
+                </div>
+                <div class="check">
+                  <div class="icone-validação" id="valid_qtd"></div><span>De 8 a 16 caracteres</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="cadastrar()" class="button cadastrar">Cadastrar-se</button>
+
+          <a href="login.html" class="a_button">
+            <span class="span tenho_conta">Já tenho uma conta</span>
+          </a>
         </div>
+      </div>
+      <img src="assets/Logo tudo branco.png" alt="Logo" width="180px" style="margin-top: 5px;">
+
+      
     </div>
+  </div>
 </body>
+
 </html>
 
 <script>
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+  function cadastrar() {
+    // aguardar();
 
-    // Array para armazenar empresas cadastradas para validação de código de ativação 
-    function cadastrar() {
-      // aguardar();
-  
-      //Recupere o valor da nova input pelo nome do id
-      // Agora vá para o método fetch logo abaixo
-      var nomeVar = ipt_user.value;
-      var emailVar = ipt_email.value;
-      var senhaVar = ipt_password.value;
-      var confirmacaoSenhaVar = ipt_check_password.value;
-  
-      // Verificando se há algum campo em branco
-      if (
-        nomeVar == "" ||
-        emailVar == "" ||
-        senhaVar == "" ||
-        confirmacaoSenhaVar == ""
-      ) {
-  
-        finalizarAguardar();
-        return false;
-      } 
-  
-      // Enviando o valor da nova input
-      fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // crie um atributo que recebe o valor recuperado aqui
-          // Agora vá para o arquivo routes/usuario.js
-          nomeServer: nomeVar,
-          emailServer: emailVar,
-          senhaServer: senhaVar
-        }),
-      })
-        .then(function (resposta) {
-          console.log("resposta: ", resposta);
-  
-          if (resposta.ok) {
-  
-            // mensagem_erro.innerHTML =
-            //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-  
-            setTimeout(() => {
-              window.location = "login.html";
-            }, "2000");
-  
-            limparFormulario();
-            finalizarAguardar();
-          } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
-          }
-        })
-        .catch(function (resposta) {
-          console.log(`#ERRO: ${resposta}`);
-          finalizarAguardar();
-        });
-  
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = ipt_user.value;
+    var emailVar = ipt_email.value;
+    var senhaVar = ipt_password.value;
+    var confirmacaoSenhaVar = ipt_check_password.value;
+    var errorTexto = '';
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == ""
+    ) {
+      errorTexto = "Algum não preenchido";
+      erros(errorTexto)
       return false;
     }
-  </script>
+
+    if (validacao_total != true){
+        errorTexto = "Cumprir requisitos";
+        erros(errorTexto)
+        return false;
+    }
+
+    if (confirmacaoSenhaVar != senhaVar) {
+      errorTexto = "Senhas Diferentes";
+      erros(errorTexto)
+      return false;
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          errorTexto = 'Cadastrado'
+          etapas(errorTexto)
+          // mensagem_erro.innerHTML =
+          //   "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+</script>
