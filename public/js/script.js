@@ -83,7 +83,6 @@ function validacao_senha() {
     console.log('Passei aq')
     validacao_senhaa = true;
   }
-
 }
 
 var validacao_emaill = false
