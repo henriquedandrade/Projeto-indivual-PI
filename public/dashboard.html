@@ -38,10 +38,30 @@
             </div>
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
-                <div class="conteudo" id="conteudo">
-                    
-                    <a id="btn-publicar" class="button publicar">Publicar</a>                   
+                <div class="conteudo" id="conteudo">  
+                    <div class="card_publicar">
+                        <div class="box_imagem">
 
+                        </div>
+
+                        <div class="box_inputs">
+                            <div class="input assunto">
+                                <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Assunto da notícia">
+                            </div>
+
+                            <div class="input chaves">
+                                <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Palavras chaves">
+                            </div>
+
+                            <textarea name="" id="" placeholder="Texto da notícia.."></textarea>
+
+                            <a id="btn-publicar" class="button publicar">Publicar</a>
+                        </div>
+                    </div>       
+
+                    
                 </div>
             </div>
         </div>
@@ -81,7 +101,7 @@
     function conteudo_dashboard(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `DASHBOARD`;
-        div_principal.innerHTML = ``;
+        // div_principal.innerHTML = ``;
         
 
     }
@@ -90,42 +110,62 @@
     function conteudo_noticias(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `PUBLICAR NOTÍCIA`;
-        div_principal.innerHTML = ``;
+        // div_principal.innerHTML = ``;
     }
 
     function conteudo_transferencias(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `PUBLICAR TRANSFÊRENCIA`;   
         
-        div_principal.innerHTML = `<div class="card">
-                        <div class="cards_inputs1">
+        div_principal.innerHTML = `<div class="card">                
+                        <div class="card_ipt_imagem">
 
-                            <select id="slt_posicao" class="input_transferencias posicao">
-                                <option value="#" selected disabled>Posição</option>
-                                <option value="Goleiro">Goleiro</option>
-                                <option value="Zagueiro">Zagueiro</option>
-                                <option value="L.   Direito">Lateral Direito</option>
-                                <option value="L.Esquerdo">Lateral Esquerdo</option>
-                                <option value="Volante">Volante</option>
-                                <option value="Meio-campista">Meio-campista</option>
-                                <option value="M.Ofensivo">Meia Ofensivo</option>
-                                <option value="Atacante">Atacante</option>
-                                <option value="P.Direita">Ponta Direita</option>
-                                <option value="P.Esquerda">Ponta Esquerda</option>
-                                <option value="Centroavante">Centroavante</option>
-                            </select>
-                            
-                            <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
-                            
-                            <div class="tres_divs">
+                        </div>
+                        <div class="cards_inputs1">
+                          
+                            <div class="div_superior">
+                                <select id="slt_posicao" class="input_transferencias posicao">
+                                    <option value="#" selected disabled>Posição</option>
+                                    <option value="Goleiro">Goleiro</option>
+                                    <option value="Zagueiro">Zagueiro</option>
+                                    <option value="L.   Direito">Lateral Direito</option>
+                                    <option value="L.Esquerdo">Lateral Esquerdo</option>
+                                    <option value="Volante">Volante</option>
+                                    <option value="Meio-campista">Meio-campista</option>
+                                    <option value="M.Ofensivo">Meia Ofensivo</option>
+                                    <option value="Atacante">Atacante</option>
+                                    <option value="P.Direita">Ponta Direita</option>
+                                    <option value="P.Esquerda">Ponta Esquerda</option>
+                                    <option value="Centroavante">Centroavante</option>
+                                </select>
+                                
+                                <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
+
                                 <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Dt. de Nasc.">
     
                                 <input type="text" id="ipt_bandeira" class="input_transferencias bandeira" placeholder="Bandeira">
     
                                 <input type="text" id="ipt_nacionalidade" class="input_transferencias nacionalidade" placeholder="Nacionalidade">
+                            </div>   
+                            
+                            <div class="div_inferior">
+                                <span class="titulo_input"> Tempo de Contrato</span>
+                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui..">
+    
+                                <span class="titulo_input"> Salário mensal</span>
+                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui..">
+    
+                                <span class="titulo_input"> Valor de Mercado</span>
+                                <input class="input_transferencias digite"type="text" placeholder="Digite aqui..">
                             </div>
                         </div>
-                    </div>`;
+
+                        
+                        <div class="div_inserir_imagens">
+      
+                        </div>
+                    </div>                    
+                    <a id="btn-publicar" class="button publicar">Publicar</a>`;
     }
 
 

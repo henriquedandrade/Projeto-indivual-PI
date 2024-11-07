@@ -121,22 +121,12 @@ a{
     flex-direction: column;
 }
 
-.card{
-    width: 500px;
-    height: 600px;
-    background-color: rgb(228, 228, 228);
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 2rem 3rem;
-}
-
 .publicar{
-    padding: 0rem 3rem;
-
     width: 500px;
     border-radius: 10px;
     height: 50px;
     margin-top: 1rem;
+    margin-bottom: 3rem;
     background-color: #000000;
     color: white;
     border: 3px solid rgb(0, 0, 0);    
@@ -147,6 +137,106 @@ a{
     color: rgb(0, 0, 0);
     border: 3px solid rgb(0, 0, 0);    
 }
+
+/* STYLES TELA DE NOTICIAS */
+
+.card_publicar{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.icones{
+    height: 30px;
+}
+
+.box_imagem{
+    width: 40%;
+    height: 100%;
+    background-color: aqua;
+}
+
+.box_inputs{
+    box-sizing: border-box;
+    padding: 0 5rem;
+    width: 60%;
+    height: 100%;
+}
+
+.input{
+    padding: 0;
+    margin: 0;
+    width: 500px;
+    display: flex;
+    height: 45px;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-top: 35px;
+}
+
+.input_noticias{
+    font-family: "Roboto";
+    border: 0;
+    padding: 0;
+    height: 50px;
+    width: 460px;
+    background-color: transparent;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+    padding: 0 5px ;
+    outline: none;
+
+}
+
+.input_noticias::placeholder{
+    color: black;
+    opacity: 1;    
+    border: 0px;
+}
+
+
+textarea{
+    box-sizing: border-box;
+    resize: none;
+    padding: 5px;
+
+    width: 500px;
+    height: 300px;
+
+    font-family: "Roboto";
+    border: 0;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid black;
+
+    margin-top: 30px;
+}
+
+textarea::placeholder{
+    color: black;
+    opacity: 1;    
+    border: 0px;
+}
+
+
+
+
+/* STYLES TELA DE TRANSFERENCIAS */
+.card{
+    box-sizing: border-box;
+    width: 500px;
+    height: 600px;
+    background-color: rgb(228, 228, 228);
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
 .input_transferencias{
     font-family:"Roboto";   
@@ -162,16 +252,23 @@ a{
 .input_transferencias::placeholder{
     color: black;
 }
+
+.card_ipt_imagem{
+    background-color: blue;
+    width: 50%;
+    height: 65%;
+}
+
 /* primeiras inputs do card */
 .cards_inputs1{
-    height: 110px;
-    width: 300px;
+    height:65%;
+    width: 50%;
     padding: 0;
     margin: 0 ;
     display:flex;
     flex-wrap: wrap;
-    justify-content: center ;
-    gap: 5px 0;
+    background-color: aqua;
+
 }
 
 #slt_posicao{       
@@ -183,17 +280,58 @@ a{
 
 #ipt_dtnasc{
     width: 35%;
-    
+    margin-right: 2.5px;
+    font-size: 12px;    
 }
 #ipt_bandeira{
     width: 25%;
+    font-size: 12px;
+
 }
 #ipt_nacionalidade{
     width: 35%;
+    margin-left: 2.5px;
+    font-size: 12px;
+
 }
 
-.tres_divs{
+.div_superior{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
+
+.digite{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    text-align: start;
+    padding: 0 5px;
+}
+.div_inferior{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+.titulo_input{
+    margin-top: 5px;
+    box-sizing: border-box;
+    padding: 0 0 0 1rem ;
+    width: 100%;
+    font-family:"Roboto";   
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.div_inserir_imagens{
+    width: 100%;
+    background-color: pink;
+    height: 35%;
+}
+
+/* FIM STYLES TELA DE TRANSFERENCIAS */
