@@ -130,7 +130,7 @@ function validacao_email() {
 
 
 function erros(erro) {
-  var div = document.getElementById("box_cadastro");
+  var div = document.getElementById("validacoes");
 
   if (erro == "Algum não preenchido") {
     div.innerHTML = `<span>Preencha todos os campos</span>`

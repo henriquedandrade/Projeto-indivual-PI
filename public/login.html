@@ -67,7 +67,10 @@
 
         if (emailVar == "" || senhaVar == "") {
             console.log('Nao preencheu')
-            erros("Algum não preenchido")
+            alerta_login.innerHTML = `Preencha todos os campos`
+            alerta_login.style.display = "flex";
+
+            // erros("Algum não preenchido")
             return false;
         }
 

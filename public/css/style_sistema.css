@@ -267,8 +267,6 @@ textarea::placeholder{
     margin: 0 ;
     display:flex;
     flex-wrap: wrap;
-    background-color: aqua;
-
 }
 
 #slt_posicao{       
