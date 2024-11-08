@@ -85,6 +85,8 @@
     var errorTexto = '';
 
     // Verificando se há algum campo em branco
+
+    
     if (
       nomeVar == "" ||
       emailVar == "" ||
@@ -96,6 +98,20 @@
       erros(errorTexto)
       return false;
     }
+     var tamanho_user = nomeVar.length;
+    if(tamanho_user > 45 ){
+      errorTexto = "User Grande"
+      erros(errorTexto)
+      return false;
+    }
+
+    var tamanho_email = emailVar.length;
+    console.log(tamanho_email)
+    if( tamanho_email < 10){
+      errorTexto = "Email Pequeno"
+      erros(errorTexto)
+      return false;
+    } 
 
     if (validacao_senhaa != true){
         errorTexto = "Cumprir requisitos";

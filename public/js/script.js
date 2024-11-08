@@ -119,8 +119,7 @@ function validacao_email() {
     icone_dot.style.backgroundColor = 'black';
   }
 
-
-  if (arroba && dot) {
+  if (arroba && dot ) {
     validacao_emaill = true;
   } else{
     validacao_emaill = false;
@@ -147,6 +146,15 @@ function erros(erro) {
   if (erro == "Cumprir requisitos email") {
     div.innerHTML = `<span>O email deve cumprir com os requisitos</span>`
     
+  }
+
+  if (erro == "Email Pequeno"){
+    div.innerHTML = `<span>Email inválido</span>`
+  }
+
+  if( erro == "User Grande"){
+    div.innerHTML = `<span>O nome e sobrenome não pode<br>ser maior que 45 caracteres</span>`
+
   }
 }
 
