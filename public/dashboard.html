@@ -39,7 +39,31 @@
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
                 <div class="conteudo" id="conteudo">  
-                           
+                    <div class="card_publicar">
+
+                        <div class="box_imagem">
+                            <div id="imagem-noticia" onclick="document.getElementById('upload').click();">
+                                <input type="file" id="upload" accept="image/png, image/jpg" onchange="ImagemNoInserir(event)">
+                            </div>
+                            <span class="span_imagem">Capa da notícia</span>
+                        </div>
+
+                        <div class="box_inputs">
+                            <div class="input assunto">
+                                <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Assunto da notícia"  id="ipt_assunto_noticia">
+                            </div>
+
+                            <div class="input chaves">
+                                <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Palavras chaves"  id="ipt_palavras_chaves">
+                            </div>
+
+                            <textarea name="descrição" placeholder="Texto da notícia.."  id="ipt_texto_noticia"></textarea>
+
+                            <a id="btn-publicar" class="button publicar">Publicar</a>
+                        </div>
+                    </div>
 
                     
                 </div>
@@ -78,10 +102,25 @@
         }
     }
 
+    function ImagemNoInserir(event) {
+        const foto_noticia = document.getElementById('imagem-noticia');
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            foto_noticia.style.backgroundSize = 'cover';
+            foto_noticia.style.backgroundImage = `url(${e.target.result})`;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
     function conteudo_dashboard(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `DASHBOARD`;
-        div_principal.innerHTML = ``;
+        // div_principal.innerHTML = ``;
         
 
     }
@@ -90,27 +129,7 @@
     function conteudo_noticias(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `PUBLICAR NOTÍCIA`;
-        div_principal.innerHTML = `<div class="card_publicar">
-                        <div class="box_imagem">
-
-                        </div>
-
-                        <div class="box_inputs">
-                            <div class="input assunto">
-                                <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Assunto da notícia">
-                            </div>
-
-                            <div class="input chaves">
-                                <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Palavras chaves">
-                            </div>
-
-                            <textarea name="" id="" placeholder="Texto da notícia.."></textarea>
-
-                            <a id="btn-publicar" class="button publicar">Publicar</a>
-                        </div>
-                    </div>`;
+        div_principal.innerHTML = ``;
     }
 
     function conteudo_transferencias(){
