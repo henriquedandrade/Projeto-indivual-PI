@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style_sistema.css">
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+    <script src="js/script.js" defer></script>
 
     <title>FutMarket</title>
 </head>
@@ -18,7 +19,7 @@
 
                 <div class="welcome">
                     <span class="text welcome_text">BEM-VINDO</span>
-                    <span class="text nome">Henrique Andrade</span>
+                    <span class="text nome" id="user_logado"></span>
                 </div>
 
                 <div class="opcoes">
@@ -38,33 +39,8 @@
             </div>
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
-                <div class="conteudo" id="conteudo">  
-                    <div class="card_publicar">
-
-                        <div class="box_imagem">
-                            <div id="imagem-noticia" onclick="document.getElementById('upload').click();">
-                                <input type="file" id="upload" accept="image/png, image/jpg" onchange="ImagemNoInserir(event)">
-                            </div>
-                            <span class="span_imagem">Capa da notícia</span>
-                        </div>
-
-                        <div class="box_inputs">
-                            <div class="input assunto">
-                                <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Assunto da notícia"  id="ipt_assunto_noticia">
-                            </div>
-
-                            <div class="input chaves">
-                                <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Palavras chaves"  id="ipt_palavras_chaves">
-                            </div>
-
-                            <textarea name="descrição" placeholder="Texto da notícia.."  id="ipt_texto_noticia"></textarea>
-
-                            <a id="btn-publicar" class="button publicar">Publicar</a>
-                        </div>
-                    </div>
-
+                <div class="conteudo" id="conteudo" >  
+                
                     
                 </div>
             </div>
@@ -76,6 +52,7 @@
 </html>
 
 <script>
+    user_logado.innerHTML= sessionStorage.NOME_USUARIO;
     opcao_escolhida("dashboard_opcao"); 
     function opcao_escolhida(escolhido) {
         sessoes = ["dashboard_opcao", "noticias_opcao", "transferencias_opcao"];
@@ -125,11 +102,34 @@
 
     }
 
-
     function conteudo_noticias(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `PUBLICAR NOTÍCIA`;
-        div_principal.innerHTML = ``;
+        div_principal.innerHTML = `<div class="card_publicar">
+
+                        <div class="box_imagem">
+                            <div id="imagem-noticia" onclick="document.getElementById('foto').click();">
+                                <input type="file" id="foto" accept="image/png, image/jpg" onchange="ImagemNoInserir(event)">
+                            </div>
+                            <span class="span_imagem">Capa da notícia</span>
+                        </div>
+
+                        <div class="box_inputs">
+                            <div class="input assunto">
+                                <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Assunto da notícia"  id="ipt_assunto_noticia">
+                            </div>
+
+                            <div class="input chaves">
+                                <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
+                                <input type="text" class="input_noticias" placeholder="Palavras chaves"  id="ipt_palavras_chaves">
+                            </div>
+
+                            <textarea name="descrição" placeholder="Texto da notícia.."  id="ipt_texto_noticia"></textarea>
+
+                            <a id="btn-publicar" class="button publicar" onclick="publicar()">Publicar</a>
+                        </div>
+                    </div>`;
     }
 
     function conteudo_transferencias(){
@@ -187,5 +187,31 @@
                     <a id="btn-publicar" class="button publicar">Publicar</a>`;
     }
 
+    function publicar() {
+        var Datetime_sql = ObterDateTime()    
+        const formData = new FormData();
+        formData.append('foto', foto.files[0])
+        formData.append('assunto', ipt_assunto_noticia.value)
+        formData.append('chaves', ipt_palavras_chaves.value)
+        formData.append('descricao', ipt_texto_noticia.value)
+        formData.append('datetime', Datetime_sql)
+        formData.append('id', sessionStorage.ID_USUARIO)
+
+        fetch("/noticia/publicar", {
+        method: "POST",
+        body: formData
+        })
+        .then(res => {
+            var btnPublicar = document.getElementById("btn-publicar");
+            btnPublicar.innerHTML='Publicado';
+            setTimeout(() => {
+                conteudo_noticias();
+          }, "2000");
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+    }
 
 </script>

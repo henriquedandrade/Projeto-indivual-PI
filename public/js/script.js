@@ -167,3 +167,27 @@ function etapas(texto) {
                      </div>`
   }
 }
+
+function ObterDateTime(){
+  const data = new Date();
+
+  const ano = data.getFullYear();
+  const mes = (data.getMonth() + 1).toString().padStart(2, '0'); 
+  const dia = data.getDate().toString().padStart(2, '0'); 
+
+  // Formando a data no formato YYYY-MM-DD
+  const dataFormatada = `${ano}-${mes}-${dia}`;
+
+  // Extraindo a hora, minuto e segundo
+  const hora = data.getHours().toString().padStart(2, '0');
+  const minuto = data.getMinutes().toString().padStart(2, '0');
+  const segundo = data.getSeconds().toString().padStart(2, '0');
+
+  const horaFormatada = `${hora}:${minuto}:${segundo}`;
+
+  const Datetime_sql = `${dataFormatada} ${horaFormatada}`;
+
+  console.log(Datetime_sql);
+
+  return Datetime_sql
+  }
