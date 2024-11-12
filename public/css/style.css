@@ -147,3 +147,22 @@ body {
     font-size: 28px;
     text-align: justify;
 }
+
+.footer{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    height: 200px;
+    width: 100%;
+    background-color: black;
+    border-top: 4px solid transparent; /* Define a largura da borda */
+     border-image: linear-gradient(90deg, #DE0000,#FFE500 ,#20C300) 1;
+}
+.footer img{
+    height: 50px;
+}
+.footer span{
+    color: white;
+}
