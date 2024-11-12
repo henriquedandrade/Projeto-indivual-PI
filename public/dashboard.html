@@ -40,7 +40,7 @@
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
                 <div class="conteudo" id="conteudo" >  
-                
+                    
                     
                 </div>
             </div>
@@ -94,11 +94,56 @@
         }
     }
 
+
+    function ImagemNoInserir1(event) {
+        const foto_noticia = document.getElementById('imagem-tranferencia');
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            foto_noticia.style.backgroundSize = 'cover';
+            foto_noticia.style.backgroundImage = `url(${e.target.result})`;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function ImagemNoInserir2(event) {
+        const foto_noticia = document.getElementById('imagem-time-atual');
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            foto_noticia.style.backgroundSize = 'cover';
+            foto_noticia.style.backgroundImage = `url(${e.target.result})`;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function ImagemNoInserir3(event) {
+        const foto_noticia = document.getElementById('imagem-time-futuro');
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            foto_noticia.style.backgroundSize = 'cover';
+            foto_noticia.style.backgroundImage = `url(${e.target.result})`;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+
     function conteudo_dashboard(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `DASHBOARD`;
-        // div_principal.innerHTML = ``;
-        
+        div_principal.innerHTML = ``;      
 
     }
 
@@ -138,7 +183,10 @@
         
         div_principal.innerHTML = `<div class="card">                
                         <div class="card_ipt_imagem">
-
+                                <div id="imagem-tranferencia" onclick="document.getElementById('foto_perfil').click();">
+                                    <input type="file" id="foto_perfil" accept="image/png, image/jpg" onchange="ImagemNoInserir1(event)">
+                                </div>
+                                <span class="span_imagem">Foto Jogador</span>
                         </div>
                         <div class="cards_inputs1">
                           
@@ -169,22 +217,39 @@
                             
                             <div class="div_inferior">
                                 <span class="titulo_input"> Tempo de Contrato</span>
-                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui..">
+                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui.." id="ipt_contrato">
     
                                 <span class="titulo_input"> Salário mensal</span>
-                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui..">
+                                <input class="input_transferencias digite" type="text" placeholder="Digite aqui.." id="ipt_salario">
     
                                 <span class="titulo_input"> Valor de Mercado</span>
-                                <input class="input_transferencias digite"type="text" placeholder="Digite aqui..">
+                                <input class="input_transferencias digite"type="text" placeholder="Digite aqui.." id="ipt_valor">
                             </div>
                         </div>
 
                         
                         <div class="div_inserir_imagens">
-      
+                            <div class="boxes_imagens_clubes" >
+                                <div id="imagem-time-atual" onclick="document.getElementById('foto_atual').click();">
+                                    <input type="file" id="foto_atual" accept="image/png, image/jpg" onchange="ImagemNoInserir2(event)">
+                                </div>    
+                                
+                                <img src="assets/transferencia icon.png" alt="icon transferencia" width="50px" height=50px"">
+    
+                                <div id="imagem-time-futuro" onclick="document.getElementById('foto_futuro').click();">
+                                    <input type="file" id="foto_futuro" accept="image/png, image/jpg" onchange="ImagemNoInserir3(event)">
+                                </div>
+                            </div>
+                            <select name="status" id="slt_status"> 
+                                <option value="#" disabled selected>Status</option>
+                                <option value="Concluída">Concluída</option>
+                                <option value="Em Negociação">Em Negociação</option>
+                                <option value="Interropida">Interropida</option>
+                            </select>
+
                         </div>
                     </div>                    
-                    <a id="btn-publicar" class="button publicar">Publicar</a>`;
+                    <a id="btn-publicar" class="button publicar" onclick="publicar_transf()">Publicar</a>`;
     }
 
     function publicar() {
@@ -212,6 +277,41 @@
             console.log(err);
         })
 
+    }
+
+    function publicar_transf(){
+        var Datetime_sql = ObterDateTime()    
+
+        const formData = new FormData();
+        formData.append("foto_perfil" ,foto_perfil.files[0]);
+        formData.append("posicao" ,slt_posicao.value);
+        formData.append("name" ,ipt_name.value);
+        formData.append("dtnasc" ,ipt_dtnasc.value);
+        formData.append("bandeira" ,ipt_bandeira.value);
+        formData.append("nacionalidade" ,ipt_nacionalidade.value);
+        formData.append("contrato" ,ipt_contrato.value);
+        formData.append("salario" ,ipt_salario.value);
+        formData.append("valor" ,ipt_valor.value);
+        formData.append("foto_atual" ,foto_atual.files[0]);
+        formData.append("foto_futuro" ,foto_futuro.files[0]);
+        formData.append("status" ,slt_status.value);
+        formData.append('datetime', Datetime_sql);
+        formData.append('id', sessionStorage.ID_USUARIO);
+
+        fetch("/noticia/transferencia", {
+        method: "POST",
+        body: formData
+        })
+        .then(res => {
+            var btnPublicar = document.getElementById("btn-publicar");
+            btnPublicar.innerHTML='Publicado';
+            setTimeout(() => {
+                conteudo_transferencias();
+          }, "2000");
+        })
+        .catch(err => {
+            console.log('Erro HTML:', err);
+        })
     }
 
 </script>

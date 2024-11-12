@@ -2,6 +2,8 @@ const multer = require('multer');
 
 // Diretório onde os arquivos serão salvos
 // ATENÇÃO: É necessário manter o diretório 'public' para poder utilizar no front-end
+
+//Noticias
 const diretorio = 'src/imagens_noticias/';
 
 const storage = multer.diskStorage({
@@ -12,9 +14,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const extensaoArquivo = file.originalname.split('.')[1];
 
-    const novoNomeArquivo = require('crypto')
-      .randomBytes(64)
-      .toString('hex');
+    const novoNomeArquivo = require('crypto').randomBytes(64).toString('hex');
 
 
     cb(null, `${novoNomeArquivo}.${extensaoArquivo}`)

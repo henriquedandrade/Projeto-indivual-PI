@@ -158,6 +158,8 @@ a{
     color: black;
     font-weight: 600;
     margin-bottom: 10rem;
+    width: 100%;
+    text-align: center;
 }
 
 #imagem-noticia {
@@ -269,6 +271,32 @@ textarea::placeholder{
 }
 
 
+#imagem-tranferencia {
+    margin-top: 3rem;
+    margin-left: 2rem;
+    width: 150px;
+    height: 150px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    background-image: url('../assets/image\ icon.svg'); 
+    background-color: white;
+    background-size: 70px;
+    background-size: cover;
+    
+    background-position: center;
+    cursor: pointer;
+}
+
+#imagem-tranferencia input {
+    display: none;
+}
+
+
+.card_ipt_imagem .span_imagem{
+    margin-left: 2.8rem;
+}
+
+
 .input_transferencias{
     font-family:"Roboto";   
     font-size: 14px;
@@ -285,7 +313,6 @@ textarea::placeholder{
 }
 
 .card_ipt_imagem{
-    background-color: blue;
     width: 50%;
     height: 65%;
 }
@@ -359,8 +386,67 @@ textarea::placeholder{
 
 .div_inserir_imagens{
     width: 100%;
-    background-color: pink;
     height: 35%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
+
+.boxes_imagens_clubes{
+    width: 100%;
+    display: flex;
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#imagem-time-atual{
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    background-image: url('../assets/image\ icon.svg'); 
+    background-color: white;
+    background-size: 70px;
+    background-size: cover;
+    
+    background-position: center;
+    cursor: pointer;
+}
+
+#imagem-time-atual input {
+    display: none;
+}
+
+#imagem-time-futuro{
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 15px;
+    background-image: url('../assets/image\ icon.svg'); 
+    background-color: white;
+    background-size: 70px;
+    background-size: cover;
+    
+    background-position: center;
+    cursor: pointer;
+}
+
+#imagem-time-futuro input {
+    display: none;
+}
+
+#slt_status{
+    font-family:"Roboto";   
+    font-size: 14px;
+    height: 30px;
+    padding: 0;
+    margin: 0 ;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+
 
 /* FIM STYLES TELA DE TRANSFERENCIAS */
