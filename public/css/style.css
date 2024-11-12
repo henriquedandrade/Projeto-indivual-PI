@@ -68,3 +68,64 @@ body {
 }
 
 
+.container.autor{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.container h1{
+    font-family:"Roboto" ;    
+
+}
+
+.boxes.autor{
+    margin-top: 5rem;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.box_right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.span{
+    font-family:"Roboto" ;    
+
+}
+.span.name{
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.span.text{
+    text-indent: 4rem;
+    margin-top: 2rem;
+    font-size: 24px;
+    text-align: justify;
+}
+
+.box.social{
+    margin-top: 2rem;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+.text_icon{
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+}
+.text_icon:hover{
+    text-decoration: underline;
+
+}
