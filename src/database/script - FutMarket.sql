@@ -25,7 +25,7 @@ create table tb_logacesso(
 
 create table tb_noticias(
 idnoticia int primary key auto_increment,
-assunto varchar(50),
+assunto varchar(150),
 chaves varchar(50),
 descricao text,
 ft_noticia varchar(256),
@@ -33,6 +33,8 @@ dtPublicacao datetime,
 fkAutor int,
 constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
+
+select * from tb_noticias;
 
 create table tb_transferencias(
 id int primary key auto_increment,

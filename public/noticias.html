@@ -79,8 +79,30 @@
                         var divDescricao = document.createElement("div");
                         var divButtons = document.createElement("div");
                         var btnEditar = document.createElement("button");
-                        var btnDeletar = document.createElement("button");
 
+                        var assunto = publicacao.assunto;
+                        var chaves = publicacao.chaves;
+                        var descricao = publicacao.descricao;
+                        var dtPublicacao = publicacao.dtPublicacao ;
+                        var ft_noticia = publicacao.ft_noticia;
+                        var fkAutor = publicacao.fkAutor;
+                        
+
+                        var feed_noticias = document.getElementById("boxes_noticias");
+                        feed_noticias.innerHTML = `<div class="noticia_public">                
+                                                        <div class="box_capa_noticia">
+                                                            <img src="" alt="" id="capa_noticia">
+                                                        </div>
+
+                                                        <div class="box_texto_noticia">
+                                                            <span class="span titulo">Título</span>
+                                                            <span class="span texto">Em tempos de constante inovação tecnológica, as empresas buscam cada vez mais integrar sistemas que otimizem a gestão de dados e melhorem a tomada de decisões. O uso de APIs e sensores facilita a coleta e análise, proporcionando informações valiosas em tempo real.</span>
+                                                            <div class="div_like" onclick="like_publicacao()">
+                                                                <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone"><span class="like_test">GOSTEI</span>
+                                                            </div>
+                                                            <span class="span infos">Há 1 hora atrás por Mario</span>
+                                                        </div>         
+                                                    </div>`;
 
                         spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
                         spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";

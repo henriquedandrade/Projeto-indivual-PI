@@ -172,7 +172,7 @@
 
                             <textarea name="descrição" placeholder="Texto da notícia.."  id="ipt_texto_noticia"></textarea>
 
-                            <a id="btn-publicar" class="button publicar" onclick="publicar()">Publicar</a>
+                            <a id="btn-publicar" class="button publicar" onclick="publicar_noticia()">Publicar</a>
                         </div>
                     </div>`;
     }
@@ -252,7 +252,7 @@
                     <a id="btn-publicar" class="button publicar" onclick="publicar_transf()">Publicar</a>`;
     }
 
-    function publicar() {
+    function publicar_noticia() {
         var Datetime_sql = ObterDateTime()    
         const formData = new FormData();
         formData.append('foto', foto.files[0])
@@ -262,7 +262,7 @@
         formData.append('datetime', Datetime_sql)
         formData.append('id', sessionStorage.ID_USUARIO)
 
-        fetch("/noticia/publicar", {
+        fetch("/publicacao/publicar_noticia", {
         method: "POST",
         body: formData
         })
@@ -298,7 +298,7 @@
         formData.append('datetime', Datetime_sql);
         formData.append('id', sessionStorage.ID_USUARIO);
 
-        fetch("/noticia/transferencia", {
+        fetch("/publicacao/publicar_transferencia", {
         method: "POST",
         body: formData
         })

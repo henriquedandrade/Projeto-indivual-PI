@@ -1,22 +1,24 @@
-const noticiaModel = require('../models/noticiaModel');
+const publicacaoModel = require('../models/publicacaoModel');
 
 
-function salvar(req, res) {
+function publicacao_noticia(req, res) {
   const imagem = req.file.filename;
+  console.log(imagem)
 
   const {assunto,chaves ,descricao , datetime , id} = req.body
 
   const usuario = { assunto,chaves ,descricao , datetime ,id ,imagem }
   
-  noticiaModel.salvar(usuario)
+  publicacaoModel.publicacao_noticia(usuario)
   .then(resultado => {
     res.status(201).send("Noticia criado com sucesso");
   }).catch(err => {
+    console.error("Erro ao executar a instrução SQL:", err.stack);
     res.status(500).send(err);
   });
 }
 
-function transferencia(req,res){
+function publicacao_transferencia(req,res){
   const foto_perfil = req.files['foto_perfil'];
   const foto_atual = req.files['foto_atual'];
   const foto_futuro = req.files['foto_futuro'];
@@ -27,7 +29,7 @@ function transferencia(req,res){
 
   console.log(usuario)
 
-  noticiaModel.transferencia(usuario)
+  publicacaoModel.publicacao_transferencia(usuario)
   .then(resposta => {
     res.status(201).send("Transferencia criado com sucesso");
   }).catch(err => {
@@ -36,14 +38,4 @@ function transferencia(req,res){
   });
 }
 
-function buscarUsuarioPeloId(req, res) {
-  console.log(req.params.id);
-  noticiaModel.buscarUsuarioPeloId(req.params.id)
-  .then(resultado => {
-    res.json(resultado);
-  }).catch(err => {
-    res.status(500).send('Erro aqui 2:',err);
-  });
-}
-
-module.exports = { salvar, transferencia, buscarUsuarioPeloId }
+module.exports = { publicacao_noticia, publicacao_transferencia}
