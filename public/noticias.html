@@ -9,7 +9,7 @@
 
     <title>FutMarket</title>
 </head>
-<body onload="atualizarFeed()">
+<body onload="atualizarNoticias()">
     <div>
         <div class="header">
             <img src="assets/Logo Branco.png" alt="Logo FutMarket" width="15%">
@@ -25,11 +25,11 @@
 
           <div class="container noticias">
             <span class="titulo_noticias">NOTÍCIAS MAIS RECENTES</span>
-            <div class="boxes_noticias">
+            <div class="boxes_noticias" id="boxes_noticias">
 
-                <div class="noticia_public">                
+                <!-- <div class="noticia_public">                
                     <div class="box_capa_noticia">
-                        <img src="" alt="" id="capa_noticia">
+                        <img src="" alt="Imagem" id="capa_noticia">
                     </div>
 
                     <div class="box_texto_noticia">
@@ -40,7 +40,7 @@
                         </div>
                         <span class="span infos">Há 1 hora atrás por Mario</span>
                     </div>         
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="footer">
@@ -51,34 +51,20 @@
 </body>
 </html>
 <script>
-    function atualizarFeed() {
-        fetch("/avisos/listar").then(function (resposta) {
+    function atualizarNoticias() {
+        var feed_noticias = document.getElementById("boxes_noticias");
+
+        fetch("/publicacao/listar_noticias").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-
-                    var feed = document.getElementById("feed_container");
-                    var mensagem = document.createElement("span");
-                    mensagem.innerHTML = "Nenhum resultado encontrado."
-                    feed.appendChild(mensagem);
+                    console.log("Erro:  Nenhum resultado encontrado!!" )
                     throw "Nenhum resultado encontrado!!";
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                    var feed = document.getElementById("feed_container");
-                    feed.innerHTML = "";
+                    console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
-
-                        // criando e manipulando elementos do HTML via JavaScript
-                        var divPublicacao = document.createElement("div");
-                        var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
-                        var spanNome = document.createElement("span");
-                        var divDescricao = document.createElement("div");
-                        var divButtons = document.createElement("div");
-                        var btnEditar = document.createElement("button");
 
                         var assunto = publicacao.assunto;
                         var chaves = publicacao.chaves;
@@ -88,53 +74,20 @@
                         var fkAutor = publicacao.fkAutor;
                         
 
-                        var feed_noticias = document.getElementById("boxes_noticias");
-                        feed_noticias.innerHTML = `<div class="noticia_public">                
+                        feed_noticias.innerHTML += `<div class="noticia_public">                
                                                         <div class="box_capa_noticia">
-                                                            <img src="" alt="" id="capa_noticia">
+                                                            <img src="imagens_noticias/${publicacao.ft_noticia}" alt="" id="capa_noticia">
                                                         </div>
 
                                                         <div class="box_texto_noticia">
-                                                            <span class="span titulo">Título</span>
-                                                            <span class="span texto">Em tempos de constante inovação tecnológica, as empresas buscam cada vez mais integrar sistemas que otimizem a gestão de dados e melhorem a tomada de decisões. O uso de APIs e sensores facilita a coleta e análise, proporcionando informações valiosas em tempo real.</span>
+                                                            <span class="span titulo">${publicacao.assunto}</span>
+                                                            <span class="span texto">${publicacao.descricao}</span>
                                                             <div class="div_like" onclick="like_publicacao()">
                                                                 <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone"><span class="like_test">GOSTEI</span>
                                                             </div>
-                                                            <span class="span infos">Há 1 hora atrás por Mario</span>
+                                                            <span class="span infos">Há 1 hora atrás por ${publicacao.username}</span>
                                                         </div>         
                                                     </div>`;
-
-                        spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
-                        spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
-                        divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
-                        btnEditar.innerHTML = "Editar";
-                        btnDeletar.innerHTML = "Deletar";
-
-                        divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
-                        spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
-                        divDescricao.className = "publicacao-descricao";
-
-                        divButtons.className = "div-buttons"
-
-                        btnEditar.className = "publicacao-btn-editar"
-                        btnEditar.id = "btnEditar" + publicacao.idAviso;
-                        btnEditar.setAttribute("onclick", `editar(${publicacao.idAviso})`);
-
-                        btnDeletar.className = "publicacao-btn-editar"
-                        btnDeletar.id = "btnDeletar" + publicacao.idAviso;
-                        btnDeletar.setAttribute("onclick", `deletar(${publicacao.idAviso})`);
-
-                        divPublicacao.appendChild(spanID);
-                        divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
-                        divPublicacao.appendChild(divDescricao);
-                        divPublicacao.appendChild(divButtons);
-                        divButtons.appendChild(btnEditar);
-                        divButtons.appendChild(btnDeletar);
-                        feed.appendChild(divPublicacao);
                     }
 
                 });

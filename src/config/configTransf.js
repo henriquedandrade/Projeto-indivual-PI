@@ -5,7 +5,7 @@ const crypto = require('crypto');
 // ATENÇÃO: É necessário manter o diretório 'public' para poder utilizar no front-end
 
 // Transferencias
-const diretorio_transferencias = 'src/imagens_transferencias/';
+const diretorio_transferencias = 'public/imagens_transferencias/';
 
  const storage = multer.diskStorage({
   destination: (req, file, cb) => {

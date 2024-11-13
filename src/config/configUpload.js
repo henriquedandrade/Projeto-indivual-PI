@@ -4,7 +4,7 @@ const multer = require('multer');
 // ATENÇÃO: É necessário manter o diretório 'public' para poder utilizar no front-end
 
 //Noticias
-const diretorio = 'src/imagens_noticias/';
+const diretorio = 'public/imagens_noticias/';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

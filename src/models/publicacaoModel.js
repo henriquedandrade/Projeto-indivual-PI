@@ -4,7 +4,7 @@ function publicacao_noticia(usuario) {
   console.log(usuario)
 
   const instrucao = `insert into tb_noticias (assunto, chaves, descricao, dtPublicacao ,ft_noticia, fkAutor) values ('${usuario.assunto}', '${usuario.chaves}', '${usuario.descricao}' , '${usuario.datetime}',  '${usuario.imagem}' ,${usuario.id});`;
-  
+
   console.log(instrucao)
 
   console.log('Passei aq no Model!')
@@ -18,4 +18,23 @@ function publicacao_transferencia(usuario){
   return database.executar(instrucao);
 }
 
-module.exports = { publicacao_noticia, publicacao_transferencia}
+function listar_noticias() {
+  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+  var instrucaoSql = `
+      SELECT 
+          a.idnoticia AS idAviso,
+          a.assunto,
+          a.chaves,
+          a.descricao,
+          a.ft_noticia,
+          a.dtPublicacao,
+          u.username          
+      FROM tb_noticias as a
+          INNER JOIN tb_cadastro as u
+              ON a.fkAutor = u.idcadastro;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { publicacao_noticia, publicacao_transferencia, listar_noticias}

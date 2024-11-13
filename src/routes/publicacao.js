@@ -21,6 +21,10 @@ router.post('/publicar_transferencia', upload_transf.fields([
   publicacaoController.publicacao_transferencia(req, res);
 });
 
+router.get("/listar_noticias", function (req, res) {
+  publicacaoController.listar_noticias(req, res);
+});
+
 //BUSCAR AS NOTICIAS PARA O FEED DE NOTICIAS
 
 
