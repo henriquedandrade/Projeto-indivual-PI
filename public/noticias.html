@@ -40,7 +40,7 @@
                         </div>
                         <span class="span infos">Há 1 hora atrás por Mario</span>
                     </div>         
-                </div> -->
+                </div> -->                
             </div>
         </div>
         <div class="footer">
@@ -57,7 +57,7 @@
         fetch("/publicacao/listar_noticias").then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
-                    console.log("Erro:  Nenhum resultado encontrado!!" )
+                    feed_noticias.innerHTML =`<span style="font-weight: bold; color: orange; font-size: 40px; width: 100%; display: flex; justify-content: center;">Nenhum resultado encontrado!!</span>`;
                     throw "Nenhum resultado encontrado!!";
                 }
 
@@ -71,8 +71,7 @@
                         var descricao = publicacao.descricao;
                         var dtPublicacao = publicacao.dtPublicacao ;
                         var ft_noticia = publicacao.ft_noticia;
-                        var fkAutor = publicacao.fkAutor;
-                        
+                        var fkAutor = publicacao.fkAutor;                        
 
                         feed_noticias.innerHTML += `<div class="noticia_public">                
                                                         <div class="box_capa_noticia">

@@ -127,6 +127,26 @@ function validacao_email() {
   console.log(`validacao: ${validacao_emaill}`)
 }
 
+function verificar_qtd(validar){
+  if( validar == 1){
+    var assunto = ipt_assunto_noticia.value;
+    var div_qtd = document.getElementById('verificar_qtd_assunto');
+    var quantidade = assunto.length;
+
+    if( quantidade <= 75){
+      div_qtd.innerHTML = `${quantidade}/75`;
+    }
+  } else{
+    var assunto = ipt_texto_noticia .value;
+    var div_qtd = document.getElementById('verificar_qtd_texto');
+    var quantidade = assunto.length;
+
+    if( quantidade <= 500){
+      div_qtd.innerHTML = `${quantidade}/500`;
+    }
+  }  
+}
+
 
 function erros(erro) {
   var div = document.getElementById("validacoes");

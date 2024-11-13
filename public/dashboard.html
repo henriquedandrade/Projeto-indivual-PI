@@ -162,15 +162,18 @@
                         <div class="box_inputs">
                             <div class="input assunto">
                                 <img src="assets/icon-assunto.png" alt="icone assuntos" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Assunto da notícia"  id="ipt_assunto_noticia">
+                                <input type="text" class="input_noticias" placeholder="Assunto da notícia"  id="ipt_assunto_noticia" maxlength="75" oninput="verificar_qtd(1)">
+                                <span id="verificar_qtd_assunto">0/75</span>
                             </div>
 
                             <div class="input chaves">
                                 <img src="assets/icon-chaves.png" alt="icone chaves" class="icones">
-                                <input type="text" class="input_noticias" placeholder="Palavras chaves"  id="ipt_palavras_chaves">
+                                <input type="text" class="input_noticias" placeholder="Palavra chave"  id="ipt_palavras_chaves">
                             </div>
-
-                            <textarea name="descrição" placeholder="Texto da notícia.."  id="ipt_texto_noticia"></textarea>
+                            <div class="div_texto_noticia">
+                                <textarea maxlength="500" name="descrição" placeholder="Texto da notícia aqui.."  id="ipt_texto_noticia" oninput="verificar_qtd(2)"></textarea>
+                                <span id="verificar_qtd_texto">0/500</span>
+                            </div>
 
                             <a id="btn-publicar" class="button publicar" onclick="publicar_noticia()">Publicar</a>
                         </div>

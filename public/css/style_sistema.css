@@ -219,7 +219,6 @@ a{
     font-weight: 600;
     padding: 0 5px ;
     outline: none;
-
 }
 
 .input_noticias::placeholder{
@@ -228,14 +227,32 @@ a{
     border: 0px;
 }
 
+#verificar_qtd_assunto{
+    font-family: "Roboto";
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    font-size: 16px;
+    color: black;
+    font-weight: 600;
+    padding: 0 5px ;
+    outline: none;
+}
+
+.div_texto_noticia{
+    width: 500px;
+    height: 300px;
+    margin-top: 30px;
+    position: relative;
+}
 
 textarea{
     box-sizing: border-box;
     resize: none;
     padding: 5px;
 
-    width: 500px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
 
     font-family: "Roboto";
     border: 0;
@@ -245,13 +262,22 @@ textarea{
     border-radius: 5px;
     border: 1px solid black;
 
-    margin-top: 30px;
 }
 
 textarea::placeholder{
     color: black;
     opacity: 1;    
     border: 0px;
+}
+
+#verificar_qtd_texto{
+    font-family: "Roboto";
+    position: absolute;
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    bottom: 10px;
+    right: 10px;
 }
 
 
