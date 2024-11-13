@@ -27,12 +27,34 @@ create table tb_noticias(
 idnoticia int primary key auto_increment,
 assunto varchar(50),
 chaves varchar(50),
-descricao varchar(256),
+descricao text,
 ft_noticia varchar(256),
 dtPublicacao datetime,
 fkAutor int,
 constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
+
+create table tb_transferencias(
+id int primary key auto_increment,
+nome varchar(50), 
+posicao varchar(50), 
+dtNasc date,
+nacionalidade  varchar(50), 
+bandeira  varchar(50), 
+tmpContrato int,
+salario int, 
+valorMercado int, 
+statuus varchar(50), 
+ft_atleta varchar(256),  
+ft_clubeAtual varchar(256), 
+ft_clubeFuturo varchar(256),  
+horapublicacao datetime,
+fkAutor int,
+constraint fkAutorTransfere foreign key (fkAutor) references tb_cadastro(idcadastro)
+);
+
+
+select * from tb_transferencias;
 
 SELECT tb_noticias.assunto AS "Assunto", 
        tb_noticias.chaves AS "Palavras-Chave", 
