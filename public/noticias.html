@@ -26,12 +26,27 @@
           <div class="container noticias">
             <span class="titulo_noticias">NOTÍCIAS MAIS RECENTES</span>
             <div class="boxes_noticias">
-              <div class="noticia_public">
-                <img src="" alt="">
 
-              </div>
+                <div class="noticia_public">                
+                    <div class="box_capa_noticia">
+                        <img src="" alt="" id="capa_noticia">
+                    </div>
+
+                    <div class="box_texto_noticia">
+                        <span class="span titulo">Título</span>
+                        <span class="span texto">Em tempos de constante inovação tecnológica, as empresas buscam cada vez mais integrar sistemas que otimizem a gestão de dados e melhorem a tomada de decisões. O uso de APIs e sensores facilita a coleta e análise, proporcionando informações valiosas em tempo real.</span>
+                        <div class="div_like">
+                            <img src="assets/like icon.svg" alt="Like icon" class="like_icon"><span class="like_test">GOSTEI</span>
+                        </div>
+                        <span class="span infos">Há 1 hora atrás por Mario</span>
+                    </div>         
+                </div>
             </div>
-          </div>
+        </div>
+        <div class="footer">
+            <img src="assets/Logo Branco.png" alt="Logo Branco">
+            <span style="text-align: center;">Todos os direitos reseverdos<br>Copyright © 2024</span>
+        </div>        
     </div>
 </body>
 </html>
@@ -46,7 +61,6 @@
                     mensagem.innerHTML = "Nenhum resultado encontrado."
                     feed.appendChild(mensagem);
                     throw "Nenhum resultado encontrado!!";
-
                 }
 
                 resposta.json().then(function (resposta) {
