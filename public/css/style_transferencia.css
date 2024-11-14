@@ -1,0 +1,193 @@
+span{
+    font-family:"Roboto"; 
+}
+.container.transferencias{
+    margin-top: 2rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.boxes_recentes{
+    display: flex;
+}
+.titulosf{
+    font-size: 30px;
+    font-weight: bold;
+    font-family:"Roboto"; 
+}
+
+.transferencias_public{
+    height: 470px;
+    width: 400px;
+    background-color: aqua;
+    border-radius: 12px;
+    margin: 2rem 1.5rem;
+}
+
+/* Div da informações corpo */
+.transferencias_infos{
+    height: 90%;
+    width: 100%;
+    background-color: #eaeaea;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 24px 12px 0 12px;
+    border-radius: 12px 12px 0 0;       
+}
+
+/* Parte foto do jogador */
+.parte_esquerda{
+    width: 50%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+}
+
+.box_foto_jogador{
+    border-radius: 10px;
+    width:  150px;
+    height: 150px;
+    background-color: rgb(88, 88, 88);
+    overflow: hidden;
+}
+#foto_jogador{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* FIM foto do jogador */
+
+/* Parte das informações do jogador  */
+.parte_direita{
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column; 
+}
+
+#info_atacante{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#info_nome{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+
+#conjuto_infos{
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+
+}
+
+#info_idade{
+    width: 40%;
+    display: flex;
+    justify-content: left;
+}
+
+#info_bandeira{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+
+}
+
+#info_nacionalidade{
+    width: 40%;
+    display: flex;
+    justify-content: right;
+}
+
+.infos_titulos{
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+/* Fim da informações do jogador */
+
+/* Começo parte de baixo da div */
+
+.parte_baixo{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fotos_clubes{
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 20px;
+
+}   
+
+.info_status{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 15%;
+}
+
+.box_foto{
+    border-radius: 10px;
+    width:  110px;
+    height: 110px;
+    background-color: rgb(88, 88, 88);
+    overflow: hidden;
+}
+
+.img_clube{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+
+/* Fim parte de baixo da div */
+
+
+
+
+/* DIV LIKE */
+.transferencias_like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 12px 12px ;
+    height: 10%;
+    width: 100%;
+    background: linear-gradient(to right, #AFFFA7, #F3E884, #FFA7A7);
+}
+
+.like_text{
+    font-size: 20px;
+    margin-left: 4px;
+}
+.like_icon{
+    height: 20px;
+}
