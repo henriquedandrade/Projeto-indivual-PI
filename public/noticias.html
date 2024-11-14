@@ -66,12 +66,22 @@
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
+                        var id= publicacao.idnoticia;
+                        var ft_noticia = publicacao.ft_noticia;
                         var assunto = publicacao.assunto;
                         var chaves = publicacao.chaves;
                         var descricao = publicacao.descricao;
                         var dtPublicacao = publicacao.dtPublicacao ;
                         var ft_noticia = publicacao.ft_noticia;
-                        var fkAutor = publicacao.fkAutor;                        
+                        var fkAutor = publicacao.fkAutor;    
+                        var username = publicacao.username
+
+                        var dataLocal = new Date(dtPublicacao);
+                        var dataBrasileira = dataLocal.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+
+                        var data = dataBrasileira.slice(0, 10); 
+                        var hora = dataBrasileira.slice(12, 17); 
 
                         feed_noticias.innerHTML += `<div class="noticia_public">                
                                                         <div class="box_capa_noticia">
@@ -79,12 +89,12 @@
                                                         </div>
 
                                                         <div class="box_texto_noticia">
-                                                            <span class="span titulo">${publicacao.assunto}</span>
-                                                            <span class="span texto">${publicacao.descricao}</span>
-                                                            <div class="div_like" onclick="like_publicacao()">
-                                                                <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone"><span class="like_test">GOSTEI</span>
+                                                            <span class="span titulo">${assunto}</span>
+                                                            <span class="span texto">${descricao}</span>
+                                                            <div class="div_like" onclick="like_publicacao('like_icone${id}')">
+                                                                <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}"><span class="like_test">GOSTEI</span>
                                                             </div>
-                                                            <span class="span infos">Há 1 hora atrás por ${publicacao.username}</span>
+                                                            <span class="span infos">Publicado em ${data} às ${hora} por ${username}</span>
                                                         </div>         
                                                     </div>`;
                     }
@@ -99,9 +109,10 @@
     }
 
 
-    function like_publicacao() {
+    function like_publicacao(elemento) {
         console.log('passei')
-        var icone = document.getElementById('like_icone');
+        console.log(elemento)
+        var icone = document.getElementById(elemento);
 
         if (icone.src.includes("liked_icon.svg")) {
             icone.src = "assets/like_icon.svg";
