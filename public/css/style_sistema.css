@@ -355,6 +355,7 @@ textarea::placeholder{
 
 #slt_posicao{       
     width: 50%;
+    margin-left: 25%;
 }
 #ipt_name{
     width: 100%;
@@ -366,22 +367,27 @@ textarea::placeholder{
     font-size: 12px;    
 }
 #ipt_bandeira{
-    width: 25%;
+    display: flex;
+    width: 20%;
+    height: 30px;
     font-size: 12px;
-
+    border: 0;
 }
 #ipt_nacionalidade{
+    padding: 0;
+    font-family:"Roboto";   
+    height: 30px;
+    border-radius: 5px;
     width: 35%;
     margin-left: 2.5px;
     font-size: 12px;
-
 }
 
 .div_superior{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 

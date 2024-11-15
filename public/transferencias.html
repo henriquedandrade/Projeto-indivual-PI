@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_transferencia.css">
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+    <script src="js/script.js" defer></script>
+
 
     <title>FutMarket</title>
 </head>
-<body>
+<body onload="atualizarTransferenciasRecentes()">
     <div>
         <div class="header">
             <img src="assets/Logo Branco.png" alt="Logo FutMarket" width="15%">
@@ -26,7 +28,7 @@
               <span class="titulosf recentes">MAIS RECENTES</span>
                 <div class="boxes_recentes" id="boxes_recentes">
 
-                  <div class="transferencias_public">
+                  <!-- <div class="transferencias_public">
                     <div class="transferencias_infos">
                       <div class="parte_esquerda">
 
@@ -83,9 +85,9 @@
                       <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone">
                       <span class="like_text">GOSTEI</span>
                     </div>
-                  </div>    
+                  </div>     -->
                   <!-- Fim da div transferencias_public -->
-
+                   
                 </div>
 
               <span class="titulosf concluidas">CONCLUÍDAS</span>
@@ -106,3 +108,135 @@
     </div>
 </body>
 </html>
+
+<script>
+  function atualizarTransferenciasRecentes() {
+        var feed_recentes = document.getElementById("boxes_recentes");
+
+        fetch("/publicacao/listar_trasnferencias_recentes").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    feed_recentes.innerHTML =`<span style="font-weight: bold; color: orange; font-size: 40px; width: 100%; display: flex; justify-content: center;">Nenhum resultado encontrado!!</span>`;
+                    throw "Nenhum resultado encontrado!!";
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+
+                        
+                        var id =  publicacao.id;
+                        var nome =  publicacao.nome;
+                        var posicao =  publicacao.posicao;
+                        var dtNasc =  publicacao.dtNasc;
+                        var nacionalidade =  publicacao.nacionalidade;
+                        var tmpContrato =  publicacao.tmpContrato;
+                        var salario =  publicacao.salario;
+                        var valorMercado =  publicacao.valorMercado;
+                        var statuus =  publicacao.statuus;
+                        var ft_atleta =  publicacao.ft_atleta;
+                        var ft_clubeAtual =  publicacao.ft_clubeAtual;
+                        var ft_clubeFuturo =  publicacao.ft_clubeFuturo;
+                        var horapublicacao =  publicacao.horapublicacao;
+                        var username =  publicacao.username; 
+
+                        
+
+                        console.log(ft_atleta)
+                        var dataLocal = new Date(horapublicacao);
+                        var dataBrasileira = dataLocal.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+
+                        var data = dataBrasileira.slice(0, 10); 
+                        var hora = dataBrasileira.slice(12, 17); 
+
+                        feed_recentes.innerHTML += `<div class="transferencias_public">
+                                                        <div class="transferencias_infos">
+                                                          <div class="parte_esquerda">
+
+                                                            <div class="box_foto_jogador">
+                                                              <img src="imagens_transferencias/${ft_atleta}" alt="Foto do Jogador" id="foto_jogador">
+                                                            </div>
+
+                                                          </div>
+
+                                                          <div class="parte_direita">
+                                                            <span id="info_atacante">${posicao}</span>
+                                                            <span id="info_nome">${nome}</span>
+                                                            
+                                                            <div id="conjuto_infos">
+                                                              <span id="info_idade">21 Anos</span>
+
+                                                              <div id="info_bandeira${id}"></div>
+
+                                                              <span id="info_nacionalidade">${nacionalidade}</span>
+                                                            </div>
+
+                                                            <span class="infos_titulos">Tempo de Contrato</span>
+                                                            <span>${tmpContrato} meses</span>
+
+                                                            <span class="infos_titulos">Salário Mensal</span>
+                                                            <span>R$ ${salario} milhões</span>
+
+                                                            <span class="infos_titulos">Valor de Mercado</span>
+                                                            <span>R$ ${valorMercado} milhoes</span>
+
+                                                          </div>
+
+                                                          <div class="parte_baixo">
+
+                                                            <div class="fotos_clubes">
+
+                                                              <div class="box_foto">
+                                                                <img src="imagens_transferencias/${ft_clubeAtual}" alt="Foto do clube atual" id="foto_atual" class="img_clube">
+                                                              </div>
+
+                                                              <div class="icon_status" id="icon_status${id}"></div>
+
+                                                              <div class="box_foto">
+                                                                <img src="imagens_transferencias/${ft_clubeFuturo}" alt="Foto do clube atual" id="foto_futuro" class="img_clube">
+                                                              </div>
+
+                                                            </div>
+
+                                                            <span class="info_status">Status: <b id="st_le${id}">${statuus}</b></span>
+                                                          </div>
+                                                        </div>
+
+                                                        <div class="transferencias_like">
+                                                          <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone">
+                                                          <span class="like_text">GOSTEI</span>
+                                                        </div>
+                                                      </div>`;
+
+                                                      var bandeira = document.getElementById(`info_bandeira${id}`);  
+                                                      bandeira.style.backgroundImage = `url('../assets/flags/${nacionalidade}.png')`;
+                                                      bandeira.style.backgroundSize = "cover";
+                                                      bandeira.style.width = "20%";
+
+                                                      var statos = document.getElementById(`icon_status${id}`);  
+                                                      statos.style.backgroundImage = `url('../assets/status/${statuus}.png')`;
+                                                      
+                                                      var legenda_status = document.getElementById(`st_le${id}`);  
+                                                      legenda_status.style.marginLeft = '5px';
+                                                      if(statuus == 'Em Negociação'){
+                                                        legenda_status.style.color= '#eba102';
+                                                      }else if( statuus == "Interropida"){
+                                                        legenda_status.style.color= 'red';
+                                                      }else if(statuus == "Concluída"){
+                                                        legenda_status.style.color= '#22c202';
+                                                      }
+
+
+                    }
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+    }
+</script>

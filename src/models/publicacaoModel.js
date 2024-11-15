@@ -13,7 +13,7 @@ function publicacao_noticia(usuario) {
 }
 
 function publicacao_transferencia(usuario){
-  const instrucao = `insert into tb_transferencias (nome, posicao, dtNasc, nacionalidade, bandeira, tmpContrato, salario, valorMercado, statuus, ft_atleta, ft_clubeAtual, ft_clubeFuturo, horapublicacao, fkAutor) values ('${usuario.name}', '${usuario.posicao}', '${usuario.dtnasc}', '${usuario.nacionalidade}','${usuario.bandeira}', ${usuario.contrato}, ${usuario.salario}, ${usuario.valor}, '${usuario.status}', '${usuario.foto_perfil[0].filename}', '${usuario.foto_atual[0].filename}','${usuario.foto_futuro[0].filename}', '${usuario.datetime}', ${usuario.id});`;
+  const instrucao = `insert into tb_transferencias (nome, posicao, dtNasc, nacionalidade, tmpContrato, salario, valorMercado, statuus, ft_atleta, ft_clubeAtual, ft_clubeFuturo, horapublicacao, fkAutor) values ('${usuario.name}', '${usuario.posicao}', '${usuario.dtnasc}', '${usuario.nacionalidade}', ${usuario.contrato}, ${usuario.salario}, ${usuario.valor}, '${usuario.status}', '${usuario.foto_perfil[0].filename}', '${usuario.foto_atual[0].filename}','${usuario.foto_futuro[0].filename}', '${usuario.datetime}', ${usuario.id});`;
 
   return database.executar(instrucao);
 }
@@ -37,4 +37,29 @@ function listar_noticias() {
   return database.executar(instrucaoSql);
 }
 
-module.exports = { publicacao_noticia, publicacao_transferencia, listar_noticias}
+function listar_trasnferencias_recentes() {
+  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+  var instrucaoSql = `
+      SELECT 
+          a.id,
+          a.nome,
+          a.posicao,
+          a.dtNasc,
+          a.nacionalidade,
+          a.tmpContrato,
+          a.salario,
+          a.valorMercado,
+          a.statuus,
+          a.ft_atleta,
+          a.ft_clubeAtual,
+          a.ft_clubeFuturo,
+          a.horapublicacao,
+          u.username          
+      FROM tb_transferencias as a
+          INNER JOIN tb_cadastro as u
+              ON a.fkAutor = u.idcadastro;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+module.exports = { publicacao_noticia, publicacao_transferencia, listar_noticias, listar_trasnferencias_recentes}

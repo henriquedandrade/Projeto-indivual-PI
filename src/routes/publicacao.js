@@ -21,12 +21,15 @@ router.post('/publicar_transferencia', upload_transf.fields([
   publicacaoController.publicacao_transferencia(req, res);
 });
 
+//BUSCAR AS NOTICIAS PARA O FEED DE NOTICIAS
 router.get("/listar_noticias", function (req, res) {
   publicacaoController.listar_noticias(req, res);
 });
 
-//BUSCAR AS NOTICIAS PARA O FEED DE NOTICIAS
-
+//BUSCAR AS NOTICIAS PARA O FEED DE TRANSFERENCIAS RECENTES
+router.get("/listar_trasnferencias_recentes", function (req, res) {
+  publicacaoController.listar_trasnferencias_recentes(req, res);
+});
 
 module.exports = router;
 

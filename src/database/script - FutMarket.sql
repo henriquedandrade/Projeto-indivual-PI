@@ -16,6 +16,9 @@ create table tb_cadastro(
     constraint fkCodigoAdm foreign key (fkcodigo) references tb_adm(idadm)
 );
 
+
+select * from tb_cadastro;
+
 create table tb_logacesso(
 	idacesso int primary key auto_increment,
     acesso datetime,
@@ -36,13 +39,16 @@ constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastr
 
 select * from tb_noticias;
 
+update tb_noticias
+set fkAutor = 3
+where idnoticia = 2;
+
 create table tb_transferencias(
 id int primary key auto_increment,
 nome varchar(50), 
 posicao varchar(50), 
 dtNasc date,
-nacionalidade  varchar(50), 
-bandeira  varchar(50), 
+nacionalidade  varchar(50),
 tmpContrato int,
 salario int, 
 valorMercado int, 
@@ -54,7 +60,6 @@ horapublicacao datetime,
 fkAutor int,
 constraint fkAutorTransfere foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
-
 
 select * from tb_transferencias;
 

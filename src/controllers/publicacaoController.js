@@ -23,9 +23,9 @@ function publicacao_transferencia(req,res){
   const foto_atual = req.files['foto_atual'];
   const foto_futuro = req.files['foto_futuro'];
 
-  const {posicao,name ,dtnasc, bandeira, nacionalidade, contrato, salario, valor,status, datetime, id} = req.body
+  const {posicao,name ,dtnasc,  nacionalidade, contrato, salario, valor,status, datetime, id} = req.body
 
-  const usuario = {posicao,name ,dtnasc, bandeira, nacionalidade, contrato, salario, valor,status, datetime, id , foto_perfil,  foto_atual , foto_futuro}
+  const usuario = {posicao,name ,dtnasc, nacionalidade, contrato, salario, valor,status, datetime, id , foto_perfil,  foto_atual , foto_futuro}
 
   console.log(usuario)
 
@@ -52,4 +52,18 @@ function listar_noticias(req, res) {
   });
 }
 
-module.exports = { publicacao_noticia, publicacao_transferencia , listar_noticias}
+function listar_trasnferencias_recentes(req, res) {
+  publicacaoModel.listar_trasnferencias_recentes().then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+module.exports = { publicacao_noticia, publicacao_transferencia , listar_noticias , listar_trasnferencias_recentes}

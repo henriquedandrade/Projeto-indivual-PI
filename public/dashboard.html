@@ -212,20 +212,45 @@
                                 <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
 
                                 <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Dt. de Nasc.">
-    
-                                <input type="text" id="ipt_bandeira" class="input_transferencias bandeira" placeholder="Bandeira">
-    
-                                <input type="text" id="ipt_nacionalidade" class="input_transferencias nacionalidade" placeholder="Nacionalidade">
+
+                                <div id="ipt_bandeira" class="input_transferencias bandeira"></div>
+
+                                <select name="ipt_nacionalidade" id="ipt_nacionalidade" oninput="verificarBandeira(ipt_nacionalidade,1)">
+                                    <option value="#" disabled selected>Nacionalidade</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Brasil">Brasil</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="Colômbia">Colômbia</option>
+                                    <option value="Equador">Equador</option>
+                                    <option value="Paraguai">Paraguai</option>
+                                    <option value="Peru">Peru</option>
+                                    <option value="Uruguai">Uruguai</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                    <option value="Estados Unidos">Estados Unidos</option>
+                                    <option value="Alemanha">Alemanha</option>
+                                    <option value="Bélgica">Bélgica</option>
+                                    <option value="França">França</option>
+                                    <option value="Reino Unido">Reino Unido</option>
+                                    <option value="Itália">Itália</option>
+                                    <option value="Espanha">Espanha</option>
+                                    <option value="Rússia">Rússia</option>
+                                    <option value="Holanda">Holanda</option>
+                                    <option value="Polônia">Polônia</option>
+                                    <option value="Suécia">Suécia</option>
+                                    <option value="Suíça">Suíça</option>
+                                    <option value="Croácia">Croácia</option>
+                                    <option value="Portugal">Portugal</option>
+                                </select>
                             </div>   
                             
                             <div class="div_inferior">
-                                <span class="titulo_input"> Tempo de Contrato</span>
+                                <span class="titulo_input"> Tempo de Contrato (Mês)</span>
                                 <input class="input_transferencias digite" type="text" placeholder="Digite aqui.." id="ipt_contrato">
     
-                                <span class="titulo_input"> Salário mensal</span>
+                                <span class="titulo_input"> Salário mensal (R$)</span>
                                 <input class="input_transferencias digite" type="text" placeholder="Digite aqui.." id="ipt_salario">
     
-                                <span class="titulo_input"> Valor de Mercado</span>
+                                <span class="titulo_input"> Valor de Mercado (R$)</span>
                                 <input class="input_transferencias digite"type="text" placeholder="Digite aqui.." id="ipt_valor">
                             </div>
                         </div>
@@ -290,7 +315,6 @@
         formData.append("posicao" ,slt_posicao.value);
         formData.append("name" ,ipt_name.value);
         formData.append("dtnasc" ,ipt_dtnasc.value);
-        formData.append("bandeira" ,ipt_bandeira.value);
         formData.append("nacionalidade" ,ipt_nacionalidade.value);
         formData.append("contrato" ,ipt_contrato.value);
         formData.append("salario" ,ipt_salario.value);

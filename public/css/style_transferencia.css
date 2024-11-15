@@ -12,6 +12,7 @@ span{
 
 .boxes_recentes{
     display: flex;
+    height: auto;
 }
 .titulosf{
     font-size: 30px;
@@ -51,7 +52,6 @@ span{
     border-radius: 10px;
     width:  150px;
     height: 150px;
-    background-color: rgb(88, 88, 88);
     overflow: hidden;
 }
 #foto_jogador{
@@ -93,6 +93,7 @@ span{
 
 #conjuto_infos{
     width: 100%;
+    height: 25px;
     display: flex;
     margin-top: 5px;
 
@@ -100,20 +101,27 @@ span{
 
 #info_idade{
     width: 40%;
+    height: 100%;
     display: flex;
+    align-items: center;
+
     justify-content: left;
 }
 
 #info_bandeira{
     width: 20%;
+    height: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
 
 }
 
 #info_nacionalidade{
     width: 40%;
+    height: 100%;
     display: flex;
+    align-items: center;
     justify-content: right;
 }
 
@@ -153,21 +161,28 @@ span{
     height: 15%;
 }
 
+
 .box_foto{
     border-radius: 10px;
     width:  110px;
     height: 110px;
-    background-color: rgb(88, 88, 88);
     overflow: hidden;
 }
 
 .img_clube{
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     object-fit: cover; 
 }
 
 
+.icon_status{
+    width: 50px;
+    height: 50px;
+    background-size: contain; /* Faz a imagem caber na div sem cortar */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    background-position: center;
+}
 /* Fim parte de baixo da div */
 
 

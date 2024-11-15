@@ -63,6 +63,7 @@
 
                 resposta.json().then(function (resposta) {
                     console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");
+
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 

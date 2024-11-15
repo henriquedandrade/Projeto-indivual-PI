@@ -210,4 +210,15 @@ function ObterDateTime(){
   console.log(Datetime_sql);
 
   return Datetime_sql
-  }
+}
+
+function verificarBandeira(id , x){
+    var nacionalidade = id.value;
+    var bandeira = document.getElementById('ipt_bandeira');  
+  
+    bandeira.style.backgroundImage = `url('../assets/flags/${nacionalidade}.png')`;
+    bandeira.style.backgroundSize = "cover";
+    bandeira.style.width = "20%";
+  
+  
+}
