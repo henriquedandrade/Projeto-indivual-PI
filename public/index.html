@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+
     <title>FutMarket</title>
 
-    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body onload="ValidarSessao()">
   <div>
     <div class="header">
       <img src="assets/Logo Branco.png" alt="Logo FutMarket" width="15%">
@@ -18,7 +20,9 @@
           <a class="titulo transf" href="transferencias.html">Rumores e Tranfêrencias</a>
           <a class="titulo noticias" href="noticias.html">Notícias</a>
         </div>
-        <a href="login.html"class="button login">Login</a>
+        <a href="login.html" class="button login" id="button_login">Login</a>
+        <a class="button login" id="button_sair" onclick="limparSessao()">Sair</a>
+        <a href="dashboard.html" class="button login" id="button_sistema" style=" margin-left: 5px;">Sistema</a>
       </div>
     </div>
 

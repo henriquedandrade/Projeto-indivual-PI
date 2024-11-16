@@ -67,6 +67,10 @@ body {
     color: rgb(255, 255, 255);
 }
 
+#button_sair{
+    cursor: pointer;
+}
+
 
 .container.autor{
     width: 100%;

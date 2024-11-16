@@ -11,7 +11,7 @@
 
     <title>FutMarket</title>
 </head>
-<body onload="atualizarTransferenciasRecentes()">
+<body onload="atualizarTransferenciasRecentes(), ValidarSessao()">
     <div>
         <div class="header">
             <img src="assets/Logo Branco.png" alt="Logo FutMarket" width="15%">
@@ -21,7 +21,9 @@
                 <a class="titulo transf agora" href="#">Rumores e Tranfêrencias</a>
                 <a class="titulo noticias" href="noticias.html">Notícias</a>
               </div>
-              <a href="login.html"class="button login">Login</a>
+              <a href="login.html" class="button login" id="button_login">Login</a>
+              <a class="button login" id="button_sair" onclick="limparSessao()">Sair</a>
+              <a href="dashboard.html" class="button login" id="button_sistema" style=" margin-left: 5px;">Sistema</a>
             </div>
           </div>
           <div class="container transferencias">
@@ -242,8 +244,15 @@ function atualizarTransferenciasRecentes() {
         });
     }
 
+
 function curtindoCard(idPost){
   var id = sessionStorage.ID_USUARIO;
+
+  if( id == undefined){
+    setTimeout(() => {
+      window.location = "login.html";
+    }, "500");    
+  }else{
         fetch(`/publicacao/${idPost}/${id}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
@@ -283,6 +292,7 @@ function curtindoCard(idPost){
         }).catch(function (resposta) {
             console.error(resposta);
         });
+  }
 }
 
 </script>

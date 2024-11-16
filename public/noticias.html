@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_noticia.css">
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+    <script src="js/script.js" defer></script>
+
 
     <title>FutMarket</title>
 </head>
-<body onload="atualizarNoticias()">
+<body onload="atualizarNoticias(), ValidarSessao()">
     <div>
         <div class="header">
             <img src="assets/Logo Branco.png" alt="Logo FutMarket" width="15%">
@@ -19,7 +21,9 @@
                 <a class="titulo transf" href="transferencias.html">Rumores e Tranfêrencias</a>
                 <a class="titulo noticias agora" href="#">Notícias</a>
               </div>
-              <a href="login.html"class="button login">Login</a>
+              <a href="login.html" class="button login" id="button_login">Login</a>
+              <a class="button login"id="button_sair"  onclick="limparSessao()">Sair</a>
+              <a href="dashboard.html" class="button login" id="button_sistema" style="margin-left: 5px;">Sistema</a>
             </div>
           </div>
 

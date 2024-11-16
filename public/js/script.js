@@ -242,3 +242,39 @@ function calcularIdade(dataNascimento) {
 
   return idade;
 }
+
+
+function ValidarSessao(){
+  var id = sessionStorage.ID_USUARIO;
+  var btnLogin = document.getElementById('button_login')
+  var btnSair = document.getElementById('button_sair')
+  var btnSistema = document.getElementById('button_sistema')
+
+  if(id == undefined){
+    console.log("Não logado")
+   btnLogin.style.display='flex';
+   btnSair.style.display='none';
+   btnSistema.style.display='none';
+  }else{
+    console.log("Logado")
+    btnLogin.style.display='none';
+    btnSair.style.display=  'flex';
+    btnSistema.style.display = 'flex';
+  }
+}
+
+function limparSessao() {
+  var btnLogin = document.getElementById('button_login');
+  var btnSair = document.getElementById('button_sair');
+  var btnSistema = document.getElementById('button_sistema');
+  btnSair.innerHTML = `Saindo`;
+
+  sessionStorage.clear();
+
+  setTimeout(() => {
+    btnLogin.style.display = 'flex';
+    btnSair.style.display = 'none';
+    btnSistema.style.display = 'none';
+    window.location = "index.html";
+  }, 1000);
+}
