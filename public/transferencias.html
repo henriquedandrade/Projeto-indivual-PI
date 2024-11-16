@@ -110,7 +110,7 @@
 </html>
 
 <script>
-  function atualizarTransferenciasRecentes() {
+function atualizarTransferenciasRecentes() {
         var feed_recentes = document.getElementById("boxes_recentes");
 
         fetch("/publicacao/listar_trasnferencias_recentes").then(function (resposta) {
@@ -121,7 +121,7 @@
                 }
 
                 resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");
                     for (let i = 0; i < resposta.length; i++) {
                         var publicacao = resposta[i];
 
@@ -141,9 +141,8 @@
                         var horapublicacao =  publicacao.horapublicacao;
                         var username =  publicacao.username; 
 
-                        
+                        var idade = calcularIdade(dtNasc)
 
-                        console.log(ft_atleta)
                         var dataLocal = new Date(horapublicacao);
                         var dataBrasileira = dataLocal.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
 
@@ -166,7 +165,7 @@
                                                             <span id="info_nome">${nome}</span>
                                                             
                                                             <div id="conjuto_infos">
-                                                              <span id="info_idade">21 Anos</span>
+                                                              <span id="info_idade">${idade} Anos</span>
 
                                                               <div id="info_bandeira${id}"></div>
 
@@ -204,9 +203,12 @@
                                                           </div>
                                                         </div>
 
-                                                        <div class="transferencias_like">
-                                                          <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone">
-                                                          <span class="like_text">GOSTEI</span>
+                                                        <div class="transferencias_like"> 
+                                                          <div  class='button_like' id="Like_${id}" onclick="curtindoCard(${id})">
+                                                            <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}">
+                                                            <span class="like_text">GOSTEI</span>
+                                                          </div>
+                                                          
                                                         </div>
                                                       </div>`;
 
@@ -239,4 +241,48 @@
             console.error(resposta);
         });
     }
+
+function curtindoCard(idPost){
+  var id = sessionStorage.ID_USUARIO;
+        fetch(`/publicacao/${idPost}/${id}`).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                  var icone = document.getElementById(`like_icone${idPost}`);
+                  icone.src = "assets/liked_icon.svg";
+
+                  
+                  return fetch(`/publicacao/like/${id}/${idPost}`, {
+                    method: "POST"
+                    })
+                    .then(res => {
+                      console.log("Like Dado!")
+                    })
+                    .catch(err => {
+                        console.log('Erro HTML:', err);
+                    })                
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");   
+                    var icone = document.getElementById(`like_icone${idPost}`);
+                    icone.src = "assets/like_icon.svg";                 
+                    return fetch(`/publicacao/unlike/${id}/${idPost}`, {
+                    method: "DELETE"
+                    })
+                    .then(res => {
+                      console.log("Unlike Dado!")
+                    })
+                    .catch(err => {
+                        console.log('Erro HTML:', err);
+                    })
+
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+        });
+}
+
 </script>

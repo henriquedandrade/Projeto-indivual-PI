@@ -198,7 +198,13 @@ span{
     width: 100%;
     background: linear-gradient(to right, #AFFFA7, #F3E884, #FFA7A7);
 }
-
+.button_like{
+    cursor: pointer;
+    display:flex ;
+    justify-items: center;
+    align-items: center;
+    user-select: none;
+}
 .like_text{
     font-size: 20px;
     margin-left: 4px;

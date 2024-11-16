@@ -62,4 +62,46 @@ function listar_trasnferencias_recentes() {
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
-module.exports = { publicacao_noticia, publicacao_transferencia, listar_noticias, listar_trasnferencias_recentes}
+
+function consultar_like_transferencias(idPost, id) {
+  console.log("ACESSEI O AVISO MODEL");
+
+  var instrucaoSql = `
+      select fkUser, fkPostTransf from tb_like_transferencias
+      join tb_cadastro on fkUser = idcadastro 
+      join tb_transferencias on fkPostTransf = id
+      where fkUser = ${id} and fkPostTransf = ${idPost};
+      `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function like_transferencias(idPost, id){
+  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+
+  var instrucaoSql = `
+     insert into tb_like_transferencias values (${id}, ${idPost}) ;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql)
+}
+
+function unlike_transferencias(idPost, id){
+  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+
+  var instrucaoSql = `
+     delete from tb_like_transferencias where fkUser = ${id} AND fkPostTransf = ${idPost};
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql)
+}
+
+module.exports = { publicacao_noticia, 
+                   publicacao_transferencia, 
+                   listar_noticias, 
+                   listar_trasnferencias_recentes,
+                   consultar_like_transferencias,
+                   like_transferencias,
+                   unlike_transferencias
+                  }
+                   

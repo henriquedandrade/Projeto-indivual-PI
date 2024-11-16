@@ -31,5 +31,18 @@ router.get("/listar_trasnferencias_recentes", function (req, res) {
   publicacaoController.listar_trasnferencias_recentes(req, res);
 });
 
+router.get("/:idPost/:id", function (req, res) {
+  publicacaoController.consultar_like_transferencias(req, res);
+
+})
+
+router.post("/like/:id/:idPost", function (req, res) {
+  publicacaoController.like_transferencias(req, res);
+});
+
+router.delete("/unlike/:id/:idPost", function (req, res) {
+  publicacaoController.unlike_transferencias(req, res);
+});
+
 module.exports = router;
 

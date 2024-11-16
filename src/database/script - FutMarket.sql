@@ -16,9 +16,6 @@ create table tb_cadastro(
     constraint fkCodigoAdm foreign key (fkcodigo) references tb_adm(idadm)
 );
 
-
-select * from tb_cadastro;
-
 create table tb_logacesso(
 	idacesso int primary key auto_increment,
     acesso datetime,
@@ -36,12 +33,6 @@ dtPublicacao datetime,
 fkAutor int,
 constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
-
-select * from tb_noticias;
-
-update tb_noticias
-set fkAutor = 3
-where idnoticia = 2;
 
 create table tb_transferencias(
 id int primary key auto_increment,
@@ -61,7 +52,30 @@ fkAutor int,
 constraint fkAutorTransfere foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
 
+create table tb_like_noticias(
+fkUser int,
+fkPostNoti int,
+constraint pkCompostaNoticias primary key( fkUser, fkPostNoti),
+constraint fkUserCurti1 foreign key (fkUser) references tb_cadastro(idcadastro),
+constraint fkPostCurtido1 foreign key (fkPostNoti) references tb_noticias(idnoticia)
+);
+
+create table tb_like_transferencias(
+fkUser int,
+fkPostTransf int,
+constraint pkCompostaTransferencias primary key( fkUser, fkPostTransf),
+constraint fkUserCurti2 foreign key (fkUser) references tb_cadastro(idcadastro),
+constraint fkPostCurtido2 foreign key (fkPostTransf) references tb_transferencias(id)
+);
+
 select * from tb_transferencias;
+select * from tb_cadastro;
+
+select * from tb_like_transferencias;
+
+select idcadastro, id from tb_like_transferencias
+join tb_cadastro on fkUser = idcadastro 
+join tb_transferencias on fkPostTransf = id;
 
 SELECT tb_noticias.assunto AS "Assunto", 
        tb_noticias.chaves AS "Palavras-Chave", 

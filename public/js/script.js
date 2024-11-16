@@ -220,5 +220,25 @@ function verificarBandeira(id , x){
     bandeira.style.backgroundSize = "cover";
     bandeira.style.width = "20%";
   
-  
+}
+
+function calcularIdade(dataNascimento) {
+  var nascimento = new Date(dataNascimento);
+  var hoje = new Date();
+
+  // Calcular a diferença de anos
+  var idade = hoje.getFullYear() - nascimento.getFullYear();
+
+  // Ajustar a idade se a data de nascimento ainda não ocorreu neste ano
+  var mesNascimento = nascimento.getMonth();
+  var mesAtual = hoje.getMonth();
+
+  var diaNascimento = nascimento.getDate();
+  var diaAtual = hoje.getDate();
+
+  if (mesAtual < mesNascimento || (mesAtual == mesNascimento && diaAtual < diaNascimento)) {
+      idade--;
+  }
+
+  return idade;
 }

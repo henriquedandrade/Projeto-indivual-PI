@@ -66,4 +66,59 @@ function listar_trasnferencias_recentes(req, res) {
   });
 }
 
-module.exports = { publicacao_noticia, publicacao_transferencia , listar_noticias , listar_trasnferencias_recentes}
+
+function consultar_like_transferencias(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  publicacaoModel.consultar_like_transferencias(idPost, id).then(function (resultado) {
+      if (resultado.length > 0) {
+          console.log("Resultado no controller: ",resultado);
+          res.status(200).json(resultado);
+      } else {
+        console.log("Resultado no controller: sem dado ")
+
+        res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function like_transferencias(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  
+  publicacaoModel.like_transferencias(idPost, id)
+  .then(resultado => {
+    console.log("Like dado! Controller")
+    res.status(201).send("Like dado! Controller");
+  }).catch(err => {
+    console.error("Erro ao executar a instrução SQL:", err.stack);
+    res.status(500).send(err);
+  });
+}
+
+function unlike_transferencias(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  
+  publicacaoModel.unlike_transferencias(idPost, id)
+  .then(resultado => {
+    console.log("Unlike dado! Controller")
+    res.status(201).send("Unlike dado! Controller");
+  }).catch(err => {
+    console.error("Erro ao executar a instrução SQL:", err.stack);
+    res.status(500).send(err);
+  });
+}
+
+module.exports = { publicacao_noticia, 
+                  publicacao_transferencia, 
+                  listar_noticias, 
+                  listar_trasnferencias_recentes,
+                  consultar_like_transferencias,
+                  like_transferencias,
+                  unlike_transferencias
+                }
