@@ -16,5 +16,9 @@ router.post("/logacesso", function (req, res) {
     usuarioController.logacesso(req, res);
 });
 
+router.post("/acessar", function (req, res) {
+    usuarioController.acessar(req, res);
+});
+
 
 module.exports = router;

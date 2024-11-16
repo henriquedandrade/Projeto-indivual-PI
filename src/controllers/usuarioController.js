@@ -94,8 +94,44 @@ function cadastrar(req, res) {
     }
 }
 
+
+function acessar(req, res) {
+    var cod = req.body.codServer;
+
+    if (cod == undefined) {
+        res.status(400).send("Seu código está undefined!");
+    } else {
+
+        usuarioModel.acessar(cod)
+            .then(
+                function (resultadoAutenticar) {
+                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                    if (resultadoAutenticar.length == 1) {
+                        console.log(resultadoAutenticar);                        
+                        res.json({
+                            id: resultadoAutenticar[0].idadm,
+                            codigo: resultadoAutenticar[0].codigo_adm
+                        });                                                 
+                    } else if (resultadoAutenticar.length == 0) {                        
+                        res.status(403).send("Código inválido!");
+                    }
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    logacesso
+    logacesso,
+    acessar
 }

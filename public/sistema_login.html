@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style_logsistema.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/sessao.js"></script>
+    <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+
+    <title>Login</title>
+</head>
+<body>
+    <div class="main_img login">
+        <div class="main login">
+            <div class="container login">
+                <div class="boxs login">    
+                    <a href="index.html" class="button voltar">X</a>
+
+                    <span class="titulo">SISTEMA</span>
+
+                    <span class="span texto_acesso_sistema">Digite o código de jornalista</span>
+                    
+                    <div class="box_inputs">
+                        <div class="box login">
+
+                            <img src="assets/key.png" alt="User icon" class="icons">
+
+                            <input type="text" id="ipt_cod" class="input username"  placeholder="Insira o código" maxlength="8">
+                        </div>
+
+                        <div class="validacoes">
+                            <div class="texto_codigo" id="texto_codigo">
+                                <span>Código Inválido</span>
+                            </div>
+                        </div>
+                    </div>
+
+    
+                    <button onclick="acessar()" class="button logar">Acessar</button>
+                    
+                      
+                </div>                    
+            </div>            
+            <img src="assets/Logo tudo branco.png" alt="Logo" width="180px" style="margin-top: 5px;">
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function acessar() {
+        var codVar = ipt_cod.value;
+
+        var alerta_login = document.getElementById("texto_codigo");
+
+        if (codVar == "") {
+            alerta_login.innerHTML = `Preencha todos os campos`
+            alerta_login.style.display = "flex";
+            return false;
+        }
+
+        fetch("/usuarios/acessar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                codServer: codVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log("Resposta completa:", json);
+                    console.log(JSON.stringify(json));
+                    alerta_login.innerHTML = `Sucesso!`;
+                    alerta_login.style.display = "flex";
+                    
+                    setTimeout(() => {
+                        alerta_login.style.display = "none";
+                        window.location = "dashboard.html";   
+                     }, 1000);
+                })
+            } else {
+                    alerta_login.style.display = "flex";
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>

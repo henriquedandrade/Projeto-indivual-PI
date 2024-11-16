@@ -3,9 +3,15 @@ create database futmarket;
 use futmarket;
 
 create table tb_adm(
-idadm int primary key auto_increment,
+idcodigo int primary key auto_increment,
 codigo_adm char(8)
 );
+
+desc tb_adm;
+
+insert into tb_adm values
+( 1 , 'XPTO1234');
+
 
 create table tb_cadastro(
 	idcadastro int primary key auto_increment,
@@ -15,6 +21,8 @@ create table tb_cadastro(
     fkcodigo int,
     constraint fkCodigoAdm foreign key (fkcodigo) references tb_adm(idadm)
 );
+
+select * from tb_cadastro;
 
 create table tb_logacesso(
 	idacesso int primary key auto_increment,
