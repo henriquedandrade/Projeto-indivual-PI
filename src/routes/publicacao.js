@@ -31,6 +31,10 @@ router.get("/listar_trasnferencias_recentes", function (req, res) {
   publicacaoController.listar_trasnferencias_recentes(req, res);
 });
 
+router.get("/contabilizar_like/:id", function (req, res) {
+  publicacaoController.contabilizar_like(req, res);
+});
+
 router.get("/:idPost/:id", function (req, res) {
   publicacaoController.consultar_like_transferencias(req, res);
 

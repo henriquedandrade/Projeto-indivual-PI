@@ -27,7 +27,7 @@
             </div>
         </div>
           <div class="container transferencias">
-              <span class="titulosf recentes">MAIS RECENTES</span>
+              <span class="titulosf recentes">TRANSFERÊNCIAS</span>
                 <div class="boxes_recentes" id="boxes_recentes">
 
                   <!-- <div class="transferencias_public">
@@ -90,22 +90,8 @@
                   </div>     -->
                   <!-- Fim da div transferencias_public -->
                    
-                </div>
-
-              <span class="titulosf concluidas">CONCLUÍDAS</span>
-              <div class="boxes_concluidas" id="boxes_concluidas">
-
+                </div>  
               </div>
-
-               <span class="titulosf em_negociacao">EM NEGOCIAÇÃO</span>
-                <div class="boxes_em_negociacao" id="boxes_em_negociacao">
-
-                </div>
-
-               <span class="titulosf interropida">INTERROPIDA</span>
-                <div class="boxes_interropida" id="boxes_interropida">
-
-                </div>
           </div>
           
           <div class="footer">
@@ -157,7 +143,7 @@ function atualizarTransferenciasRecentes() {
                         var data = dataBrasileira.slice(0, 10); 
                         var hora = dataBrasileira.slice(12, 17); 
 
-                        feed_recentes.innerHTML += `<div class="transferencias_public">
+                        feed_recentes.innerHTML += `<div class="transferencias_public swiper-slide">
                                                         <div class="transferencias_infos">
                                                           <div class="parte_esquerda">
 
@@ -213,33 +199,51 @@ function atualizarTransferenciasRecentes() {
                                                         <div class="transferencias_like"> 
                                                           <div  class='button_like' id="Like_${id}" onclick="curtindoCard(${id})">
                                                             <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}">
-                                                            <span class="like_text">GOSTEI</span>
+                                                            <span class="like_text" id="quantidade_like${id}"></span>
                                                           </div>
                                                           
                                                         </div>
                                                       </div>`;
 
-                                                      var bandeira = document.getElementById(`info_bandeira${id}`);  
-                                                      bandeira.style.backgroundImage = `url('../assets/flags/${nacionalidade}.png')`;
-                                                      bandeira.style.backgroundSize = "cover";
-                                                      bandeira.style.width = "20%";
+                        var bandeira = document.getElementById(`info_bandeira${id}`);  
+                        bandeira.style.backgroundImage = `url('../assets/flags/${nacionalidade}.png')`;
+                        bandeira.style.backgroundSize = "cover";
+                        bandeira.style.width = "20%";
+                        var statos = document.getElementById(`icon_status${id}`);  
+                        statos.style.backgroundImage = `url('../assets/status/${statuus}.png')`;
+                        var legenda_status = document.getElementById(`st_le${id}`);  
+                        legenda_status.style.marginLeft = '5px';
+                        if(statuus == 'Em Negociação'){
+                          legenda_status.style.color= '#eba102';
+                        }else if( statuus == "Interropida"){
+                          legenda_status.style.color= 'red';
+                        }else if(statuus == "Concluída"){
+                          legenda_status.style.color= '#22c202';
+                        }
 
-                                                      var statos = document.getElementById(`icon_status${id}`);  
-                                                      statos.style.backgroundImage = `url('../assets/status/${statuus}.png')`;
-                                                      
-                                                      var legenda_status = document.getElementById(`st_le${id}`);  
-                                                      legenda_status.style.marginLeft = '5px';
-                                                      if(statuus == 'Em Negociação'){
-                                                        legenda_status.style.color= '#eba102';
-                                                      }else if( statuus == "Interropida"){
-                                                        legenda_status.style.color= 'red';
-                                                      }else if(statuus == "Concluída"){
-                                                        legenda_status.style.color= '#22c202';
-                                                      }
+                        contabilizarLikes(id);
 
+                        // fetch(`/publicacao/contabilizar_like/${id}`).then(function (resposta) {
+                        //         if (resposta.ok) {
+                        //             if (resposta.status == 204) {                    
+                        //                 throw "Nenhum resultado encontrado!!";
+                        //             }
 
-                    }
-
+                        //             resposta.json().then(function (resposta) {
+                        //                 console.log("Dados recebidos: ", JSON.stringify(resposta));
+                        //                 var qtd = resposta[0].total_likes
+                        //                 console.log(qtd)
+                        //                 var alterar_qtd= document.getElementById(`quantidade_like${id}`)
+                        //                 console.log(alterar_qtd)
+                        //                 alterar_qtd.innerHTML = `${qtd}`
+                        //             });
+                        //         } else {
+                        //             throw ('Houve um erro na API!');
+                        //         }
+                        //     }).catch(function (resposta) {
+                        //         console.error(resposta);
+                        // });
+                    }                    
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -249,6 +253,28 @@ function atualizarTransferenciasRecentes() {
         });
     }
 
+
+function contabilizarLikes(id) {
+  fetch(`/publicacao/contabilizar_like/${id}`)
+      .then(function (resposta) {
+          if (resposta.ok) {
+              if (resposta.status == 204) {
+                  throw "Nenhum resultado encontrado!!";
+              }
+
+          resposta.json().then(function (resposta) {
+              var qtd = resposta[0].total_likes;
+              var alterar_qtd = document.getElementById(`quantidade_like${id}`);
+              alterar_qtd.innerHTML = `${qtd}`;
+          });
+      } else {
+          throw ('Houve um erro na API!');
+      }
+  })
+  .catch(function (erro) {
+    console.error(erro);
+  });
+}
 
 function curtindoCard(idPost){
   var id = sessionStorage.ID_USUARIO;
@@ -270,6 +296,7 @@ function curtindoCard(idPost){
                     })
                     .then(res => {
                       console.log("Like Dado!")
+                      contabilizarLikes(idPost);
                     })
                     .catch(err => {
                         console.log('Erro HTML:', err);
@@ -285,6 +312,7 @@ function curtindoCard(idPost){
                     })
                     .then(res => {
                       console.log("Unlike Dado!")
+                      contabilizarLikes(idPost);
                     })
                     .catch(err => {
                         console.log('Erro HTML:', err);

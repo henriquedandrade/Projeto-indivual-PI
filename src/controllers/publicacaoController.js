@@ -66,6 +66,21 @@ function listar_trasnferencias_recentes(req, res) {
   });
 }
 
+function contabilizar_like(req, res) {
+  const id = req.params.id;
+  publicacaoModel.contabilizar_like(id).then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
 
 function consultar_like_transferencias(req, res) {
   const idPost = req.params.idPost;
@@ -118,6 +133,7 @@ module.exports = { publicacao_noticia,
                   publicacao_transferencia, 
                   listar_noticias, 
                   listar_trasnferencias_recentes,
+                  contabilizar_like,
                   consultar_like_transferencias,
                   like_transferencias,
                   unlike_transferencias

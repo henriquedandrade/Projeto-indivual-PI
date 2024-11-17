@@ -13,6 +13,9 @@ span{
 .boxes_recentes{
     display: flex;
     height: auto;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: center;  
 }
 .titulosf{
     font-size: 30px;
@@ -23,9 +26,8 @@ span{
 .transferencias_public{
     height: 470px;
     width: 400px;
-    background-color: aqua;
     border-radius: 12px;
-    margin: 2rem 1.5rem;
+    margin: 2rem 1rem 0 1rem;
 }
 
 /* Div da informações corpo */

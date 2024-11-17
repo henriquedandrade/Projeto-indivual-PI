@@ -63,6 +63,19 @@ function listar_trasnferencias_recentes() {
   return database.executar(instrucaoSql);
 }
 
+function contabilizar_like(id) {
+  console.log("ACESSEI O AVISO MODEL");
+
+  var instrucaoSql = `
+    select fkPostTransf, count(fkUser) as total_likes
+    from tb_like_transferencias
+    where fkPostTransf = ${id}
+    group by fkPostTransf;
+      `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 function consultar_like_transferencias(idPost, id) {
   console.log("ACESSEI O AVISO MODEL");
 
@@ -100,6 +113,7 @@ module.exports = { publicacao_noticia,
                    publicacao_transferencia, 
                    listar_noticias, 
                    listar_trasnferencias_recentes,
+                   contabilizar_like,
                    consultar_like_transferencias,
                    like_transferencias,
                    unlike_transferencias
