@@ -14,6 +14,26 @@ function publicacao_noticia(usuario) {
   return database.executar(instrucao);
 }
 
+function listar_noticias() {
+  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+  var instrucaoSql = `
+      select 
+          a.idnoticia,
+          a.assunto,
+          a.chaves,
+          a.descricao,
+          a.ft_noticia,
+          a.dtPublicacao,
+          u.username          
+      from tb_noticias as a
+          inner join tb_cadastro as u
+              on a.fkAutor = u.idcadastro
+              order by dtPublicacao desc;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 function contabilizar_likeNoticia(id) {
   console.log("ACESSEI O AVISO MODEL");
 
@@ -79,25 +99,6 @@ function publicacao_transferencia(usuario){
   const instrucao = `insert into tb_transferencias (nome, posicao, dtNasc, nacionalidade, tmpContrato, salario, valorMercado, statuus, ft_atleta, ft_clubeAtual, ft_clubeFuturo, horapublicacao, fkAutor) values ('${usuario.name}', '${usuario.posicao}', '${usuario.dtnasc}', '${usuario.nacionalidade}', ${usuario.contrato}, ${usuario.salario}, ${usuario.valor}, '${usuario.status}', '${usuario.foto_perfil[0].filename}', '${usuario.foto_atual[0].filename}','${usuario.foto_futuro[0].filename}', '${usuario.datetime}', ${usuario.id});`;
 
   return database.executar(instrucao);
-}
-
-function listar_noticias() {
-  console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-  var instrucaoSql = `
-      SELECT 
-          a.idnoticia,
-          a.assunto,
-          a.chaves,
-          a.descricao,
-          a.ft_noticia,
-          a.dtPublicacao,
-          u.username          
-      FROM tb_noticias as a
-          INNER JOIN tb_cadastro as u
-              ON a.fkAutor = u.idcadastro;
-  `;
-  console.log("Executando a instrução SQL: \n" + instrucaoSql);
-  return database.executar(instrucaoSql);
 }
 
 function listar_trasnferencias_recentes() {
