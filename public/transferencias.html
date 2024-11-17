@@ -220,30 +220,9 @@ function atualizarTransferenciasRecentes() {
                         }else if(statuus == "Concluída"){
                           legenda_status.style.color= '#22c202';
                         }
-
-                        contabilizarLikes(id);
-
-                        // fetch(`/publicacao/contabilizar_like/${id}`).then(function (resposta) {
-                        //         if (resposta.ok) {
-                        //             if (resposta.status == 204) {                    
-                        //                 throw "Nenhum resultado encontrado!!";
-                        //             }
-
-                        //             resposta.json().then(function (resposta) {
-                        //                 console.log("Dados recebidos: ", JSON.stringify(resposta));
-                        //                 var qtd = resposta[0].total_likes
-                        //                 console.log(qtd)
-                        //                 var alterar_qtd= document.getElementById(`quantidade_like${id}`)
-                        //                 console.log(alterar_qtd)
-                        //                 alterar_qtd.innerHTML = `${qtd}`
-                        //             });
-                        //         } else {
-                        //             throw ('Houve um erro na API!');
-                        //         }
-                        //     }).catch(function (resposta) {
-                        //         console.error(resposta);
-                        // });
-                    }                    
+                        contabilizarLikes(id);                        
+                    } 
+                    QualTransfCurtiu();                   
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -255,7 +234,7 @@ function atualizarTransferenciasRecentes() {
 
 
 function contabilizarLikes(id) {
-  fetch(`/publicacao/contabilizar_like/${id}`)
+  fetch(`/publicacao/contabilizarTransf_like/${id}`)
       .then(function (resposta) {
           if (resposta.ok) {
               if (resposta.status == 204) {
@@ -276,6 +255,35 @@ function contabilizarLikes(id) {
   });
 }
 
+function QualTransfCurtiu() {
+  var id = sessionStorage.ID_USUARIO;
+  if(id == undefined){
+    return
+  }else{
+    fetch(`/publicacao/qualTransf_curtiu/${id}`)
+        .then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    throw "Nenhum resultado encontrado!!";
+                }  
+            resposta.json().then(function (resposta) {
+              for (let i = 0; i < resposta.length; i++) {
+                var publicacao = resposta[i];
+                var postCurtido = publicacao.card_curtidos
+                var icon_curtido = document.getElementById(`like_icone${postCurtido}`)
+                icon_curtido.src = "assets/liked_icon.svg";
+              }              
+            });
+        } else {
+            throw ('Houve um erro na API!');
+        }
+    })
+    .catch(function (erro) {
+      console.error(erro);
+    });
+  }
+}
+
 function curtindoCard(idPost){
   var id = sessionStorage.ID_USUARIO;
 
@@ -284,14 +292,14 @@ function curtindoCard(idPost){
       window.location = "login.html";
     }, "500");    
   }else{
-        fetch(`/publicacao/${idPost}/${id}`).then(function (resposta) {
+        fetch(`/publicacao/consultarTransf/${idPost}/${id}`).then(function (resposta) {
             if (resposta.ok) {
                 if (resposta.status == 204) {
                   var icone = document.getElementById(`like_icone${idPost}`);
                   icone.src = "assets/liked_icon.svg";
 
                   
-                  return fetch(`/publicacao/like/${id}/${idPost}`, {
+                  return fetch(`/publicacao/likeTransferencia/${id}/${idPost}`, {
                     method: "POST"
                     })
                     .then(res => {
@@ -307,7 +315,7 @@ function curtindoCard(idPost){
                     console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");   
                     var icone = document.getElementById(`like_icone${idPost}`);
                     icone.src = "assets/like_icon.svg";                 
-                    return fetch(`/publicacao/unlike/${id}/${idPost}`, {
+                    return fetch(`/publicacao/unlikeTransferencia/${id}/${idPost}`, {
                     method: "DELETE"
                     })
                     .then(res => {

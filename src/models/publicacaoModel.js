@@ -76,6 +76,18 @@ function contabilizar_like(id) {
   return database.executar(instrucaoSql);
 }
 
+function qualTransf_curtiu(id) {
+  console.log("ACESSEI O AVISO MODEL");
+
+  var instrucaoSql = `
+    select fkPostTransf as card_curtidos
+    from tb_like_transferencias
+    where fkUser = ${id};
+      `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 function consultar_like_transferencias(idPost, id) {
   console.log("ACESSEI O AVISO MODEL");
 
@@ -114,6 +126,7 @@ module.exports = { publicacao_noticia,
                    listar_noticias, 
                    listar_trasnferencias_recentes,
                    contabilizar_like,
+                   qualTransf_curtiu,
                    consultar_like_transferencias,
                    like_transferencias,
                    unlike_transferencias

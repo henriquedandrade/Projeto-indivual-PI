@@ -8,12 +8,12 @@ router.get("", (req, res) => {
   res.render("dashboard")
 });
 
-//publicar NOTICIA
+//ROTA PARA PUBLICAR NOTICIA
 router.post('/publicar_noticia', upload.single('foto'), (req, res) => {
   publicacaoController.publicacao_noticia(req, res);
 });
 
-//publicar TRANSFÊRENCIA
+//ROTA PARA PUBLICAR TRANSFÊRENCIA
 router.post('/publicar_transferencia', upload_transf.fields([
   { name: 'foto_perfil', maxCount: 1 },
   { name: 'foto_atual', maxCount: 1 },
@@ -21,30 +21,38 @@ router.post('/publicar_transferencia', upload_transf.fields([
   publicacaoController.publicacao_transferencia(req, res);
 });
 
-//BUSCAR AS NOTICIAS PARA O FEED DE NOTICIAS
+//ROTA PARA BUSCAR AS NOTICIAS PARA O FEED DE NOTICIAS
 router.get("/listar_noticias", function (req, res) {
   publicacaoController.listar_noticias(req, res);
 });
 
-//BUSCAR AS NOTICIAS PARA O FEED DE TRANSFERENCIAS RECENTES
+//ROTA PARA BUSCAR AS NOTICIAS PARA O FEED DE TRANSFERENCIAS RECENTES
 router.get("/listar_trasnferencias_recentes", function (req, res) {
   publicacaoController.listar_trasnferencias_recentes(req, res);
 });
 
-router.get("/contabilizar_like/:id", function (req, res) {
+// ROTA PARA CONTABILIZAR QUANTOS LIKES CADA CARD DE TRANSFÊRENCIA POSSUI, SERÁ EXECUTADO NO FOR DA FUNÇÃO AtualizarTransferenciasREcentes()
+router.get("/contabilizarTransf_like/:id", function (req, res) {
   publicacaoController.contabilizar_like(req, res);
 });
 
-router.get("/:idPost/:id", function (req, res) {
-  publicacaoController.consultar_like_transferencias(req, res);
+//ROTA PARA VERIFICAR QUAIS CARD DE TRANSFÊRENCIA O USUÁRIO CURTIU, ESSA ROTA SERÁ EXECUTADA AO ACABAR DE CARREGAR OS CARD DE TRANSFÊRENCIA NO ARQUIVO HTML
+router.get("/qualTransf_curtiu/:id", function (req, res) {
+  publicacaoController.qualTransf_curtiu(req, res);
+});
 
+// ROTA PARA QUANDO O USUÁRIO CLICAR NO BOTÃO DE CURTIR, ELE PRIMEIRO IRÁ CONSULTAR SE JÁ CURTIU OU NÃO CURTIU, POSTERIORMENTE IRÁ EXECUTAR A PRÓXIMA ROTA DE CURTIR OU NÃO CURTIR
+router.get("/consultarTransf/:idPost/:id", function (req, res) {
+  publicacaoController.consultar_like_transferencias(req, res);
 })
 
-router.post("/like/:id/:idPost", function (req, res) {
+// ROTA PARA DAR LIKE NO CARD DE TRANSFERENCIAS
+router.post("/likeTransferencia/:id/:idPost", function (req, res) {
   publicacaoController.like_transferencias(req, res);
 });
 
-router.delete("/unlike/:id/:idPost", function (req, res) {
+// ROTA PARA TIRAR LIKE NO CARD DE TRANSFERENCIAS
+router.delete("/unlikeTransferencia/:id/:idPost", function (req, res) {
   publicacaoController.unlike_transferencias(req, res);
 });
 
