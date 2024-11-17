@@ -1,5 +1,6 @@
 const publicacaoModel = require('../models/publicacaoModel');
 
+// NOTÍCIAS
 
 function publicacao_noticia(req, res) {
   const imagem = req.file.filename;
@@ -17,6 +18,100 @@ function publicacao_noticia(req, res) {
     res.status(500).send(err);
   });
 }
+
+function listar_noticias(req, res) {
+  publicacaoModel.listar_noticias().then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function contabilizar_likeNoticia(req, res) {
+  const id = req.params.id;
+  publicacaoModel.contabilizar_likeNoticia(id).then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function qualNoticia_curtiu(req, res) {
+  const id = req.params.id;
+  publicacaoModel.qualNoticia_curtiu(id).then(function (resultado) {
+      if (resultado.length > 0) {
+          res.status(200).json(resultado);
+      } else {
+          res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function consultar_like_noticia(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  publicacaoModel.consultar_like_noticia(idPost, id).then(function (resultado) {
+      if (resultado.length > 0) {
+          console.log("Resultado no controller: ",resultado);
+          res.status(200).json(resultado);
+      } else {
+        console.log("Resultado no controller: sem dado ")
+
+        res.status(204).send("Nenhum resultado encontrado!")
+      }
+  }).catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+      res.status(500).json(erro.sqlMessage);
+  });
+}
+
+function like_noticia(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  
+  publicacaoModel.like_noticia(idPost, id)
+  .then(resultado => {
+    console.log("Like dado! Controller")
+    res.status(201).send("Like dado! Controller");
+  }).catch(err => {
+    console.error("Erro ao executar a instrução SQL:", err.stack);
+    res.status(500).send(err);
+  });
+}
+
+function unlike_noticia(req, res) {
+  const idPost = req.params.idPost;
+  const id = req.params.id;
+  
+  publicacaoModel.unlike_noticia(idPost, id)
+  .then(resultado => {
+    console.log("Unlike dado! Controller")
+    res.status(201).send("Unlike dado! Controller");
+  }).catch(err => {
+    console.error("Erro ao executar a instrução SQL:", err.stack);
+    res.status(500).send(err);
+  });
+}
+
+
+// TRANSFÊRENCIAS
 
 function publicacao_transferencia(req,res){
   const foto_perfil = req.files['foto_perfil'];
@@ -38,20 +133,6 @@ function publicacao_transferencia(req,res){
   });
 }
 
-function listar_noticias(req, res) {
-  publicacaoModel.listar_noticias().then(function (resultado) {
-      if (resultado.length > 0) {
-          res.status(200).json(resultado);
-      } else {
-          res.status(204).send("Nenhum resultado encontrado!")
-      }
-  }).catch(function (erro) {
-      console.log(erro);
-      console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
-      res.status(500).json(erro.sqlMessage);
-  });
-}
-
 function listar_trasnferencias_recentes(req, res) {
   publicacaoModel.listar_trasnferencias_recentes().then(function (resultado) {
       if (resultado.length > 0) {
@@ -66,7 +147,7 @@ function listar_trasnferencias_recentes(req, res) {
   });
 }
 
-function contabilizar_like(req, res) {
+function contabilizar_likeTransf(req, res) {
   const id = req.params.id;
   publicacaoModel.contabilizar_like(id).then(function (resultado) {
       if (resultado.length > 0) {
@@ -145,9 +226,14 @@ function unlike_transferencias(req, res) {
 
 module.exports = { publicacao_noticia, 
                   publicacao_transferencia, 
+                  contabilizar_likeNoticia,
+                  qualNoticia_curtiu,
+                  consultar_like_noticia,
+                  like_noticia,
+                  unlike_noticia,
                   listar_noticias, 
                   listar_trasnferencias_recentes,
-                  contabilizar_like,
+                  contabilizar_likeTransf,
                   qualTransf_curtiu,
                   consultar_like_transferencias,
                   like_transferencias,

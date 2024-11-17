@@ -197,7 +197,7 @@ function atualizarTransferenciasRecentes() {
                                                         </div>
 
                                                         <div class="transferencias_like"> 
-                                                          <div  class='button_like' id="Like_${id}" onclick="curtindoCard(${id})">
+                                                          <div  class='button_like' id="Like_${id}" onclick="curtindoCardTransferencia(${id})">
                                                             <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}">
                                                             <span class="like_text" id="quantidade_like${id}"></span>
                                                           </div>
@@ -220,9 +220,9 @@ function atualizarTransferenciasRecentes() {
                         }else if(statuus == "Concluída"){
                           legenda_status.style.color= '#22c202';
                         }
-                        contabilizarLikes(id);                        
+                        contabilizarLikesTransferencias(id);                        
                     } 
-                    QualTransfCurtiu();                   
+                    QualTransfCurtiuTransferencias();                   
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -232,12 +232,13 @@ function atualizarTransferenciasRecentes() {
         });
     }
 
-
-function contabilizarLikes(id) {
+function contabilizarLikesTransferencias(id) {
   fetch(`/publicacao/contabilizarTransf_like/${id}`)
       .then(function (resposta) {
           if (resposta.ok) {
               if (resposta.status == 204) {
+                  var alterar_qtd = document.getElementById(`quantidade_like${id}`);
+                  alterar_qtd.innerHTML = `0`;
                   throw "Nenhum resultado encontrado!!";
               }
 
@@ -255,7 +256,7 @@ function contabilizarLikes(id) {
   });
 }
 
-function QualTransfCurtiu() {
+function QualTransfCurtiuTransferencias() {
   var id = sessionStorage.ID_USUARIO;
   if(id == undefined){
     return
@@ -270,6 +271,7 @@ function QualTransfCurtiu() {
               for (let i = 0; i < resposta.length; i++) {
                 var publicacao = resposta[i];
                 var postCurtido = publicacao.card_curtidos
+                console.log(postCurtido)
                 var icon_curtido = document.getElementById(`like_icone${postCurtido}`)
                 icon_curtido.src = "assets/liked_icon.svg";
               }              
@@ -284,7 +286,7 @@ function QualTransfCurtiu() {
   }
 }
 
-function curtindoCard(idPost){
+function curtindoCardTransferencia(idPost){
   var id = sessionStorage.ID_USUARIO;
 
   if( id == undefined){
@@ -304,7 +306,7 @@ function curtindoCard(idPost){
                     })
                     .then(res => {
                       console.log("Like Dado!")
-                      contabilizarLikes(idPost);
+                      contabilizarLikesTransferencias(idPost);
                     })
                     .catch(err => {
                         console.log('Erro HTML:', err);
@@ -320,7 +322,8 @@ function curtindoCard(idPost){
                     })
                     .then(res => {
                       console.log("Unlike Dado!")
-                      contabilizarLikes(idPost);
+                      contabilizarLikesTransferencias(idPost);
+                      
                     })
                     .catch(err => {
                         console.log('Erro HTML:', err);

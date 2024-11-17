@@ -96,14 +96,15 @@
                                                         <div class="box_texto_noticia">
                                                             <span class="span titulo">${assunto}</span>
                                                             <span class="span texto">${descricao}</span>
-                                                            <div class="div_like" onclick="like_publicacao('like_icone${id}')">
-                                                                <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}"><span class="like_test">GOSTEI</span>
+                                                            <div class="div_like" onclick="curtindoCardNoticia(${id})">
+                                                                <img src="assets/like_icon.svg" alt="Like icon" class="like_icon" id="like_icone${id}"><span class="like_test" id='quantidade_like${id}'></span>
                                                             </div>
                                                             <span class="span infos">Publicado em ${data} às ${hora} por ${username}</span>
                                                         </div>         
                                                     </div>`;
+                        contabilizarLikesNoticias(id);
                     }
-
+                    QualTransfCurtiuNoticias();
                 });
             } else {
                 throw ('Houve um erro na API!');
@@ -114,15 +115,110 @@
     }
 
 
-    function like_publicacao(elemento) {
-        console.log('passei')
-        console.log(elemento)
-        var icone = document.getElementById(elemento);
 
-        if (icone.src.includes("liked_icon.svg")) {
-            icone.src = "assets/like_icon.svg";
-        } else {
-            icone.src = "assets/liked_icon.svg";
+    function contabilizarLikesNoticias(id) {
+        fetch(`/publicacao/contabilizarNoticia_like/${id}`)
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    if (resposta.status == 204) {
+                        var alterar_qtd = document.getElementById(`quantidade_like${id}`);
+                        alterar_qtd.innerHTML = `0`;
+                        throw "Nenhum resultado encontrado!!";
+                    }
+
+                resposta.json().then(function (resposta) {
+                    var qtd = resposta[0].total_likes;
+                    var alterar_qtd = document.getElementById(`quantidade_like${id}`);
+                    alterar_qtd.innerHTML = `${qtd}`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+        });
+        }
+
+    function QualTransfCurtiuNoticias() {
+        var id = sessionStorage.ID_USUARIO;
+        if(id == undefined){
+            return
+        }else{
+            fetch(`/publicacao/qualNoticia_curtiu/${id}`)
+                .then(function (resposta) {
+                    if (resposta.ok) {
+                        if (resposta.status == 204) {
+                            throw "Nenhum resultado encontrado!!";
+                        }  
+                    resposta.json().then(function (resposta) {
+                    for (let i = 0; i < resposta.length; i++) {
+                        var publicacao = resposta[i];
+                        var postCurtido = publicacao.card_curtidos
+                        var icon_curtido = document.getElementById(`like_icone${postCurtido}`)
+                        icon_curtido.src = "assets/liked_icon.svg";
+                    }              
+                    });
+                } else {
+                    throw ('Houve um erro na API!');
+                }
+            })
+            .catch(function (erro) {
+            console.error(erro);
+            });
         }
     }
+
+    function curtindoCardNoticia(idPost){
+        var id = sessionStorage.ID_USUARIO;
+
+        if( id == undefined){
+            setTimeout(() => {
+            window.location = "login.html";
+            }, "500");    
+        }else{
+                fetch(`/publicacao/consultarNoticia/${idPost}/${id}`).then(function (resposta) {
+                    if (resposta.ok) {
+                        if (resposta.status == 204) {
+                        var icone = document.getElementById(`like_icone${idPost}`);
+                        icone.src = "assets/liked_icon.svg";
+
+                        
+                        return fetch(`/publicacao/likeNoticia/${id}/${idPost}`, {
+                            method: "POST"
+                            })
+                            .then(res => {
+                            console.log("Like Dado!")
+                            contabilizarLikesNoticias(idPost);
+                            })
+                            .catch(err => {
+                                console.log('Erro HTML:', err);
+                            })                
+                        }
+
+                        resposta.json().then(function (resposta) {
+                            console.log("Dados recebidos: ", JSON.stringify(resposta), "\n");   
+                            var icone = document.getElementById(`like_icone${idPost}`);
+                            icone.src = "assets/like_icon.svg";                 
+                            return fetch(`/publicacao/unlikeNoticia/${id}/${idPost}`, {
+                            method: "DELETE"
+                            })
+                            .then(res => {
+                            console.log("Unlike Dado!")
+                            contabilizarLikesNoticias(idPost);
+                            })
+                            .catch(err => {
+                                console.log('Erro HTML:', err);
+                            })
+
+                        });
+                    } else {
+                        throw ('Houve um erro na API!');
+                    }
+                }).catch(function (resposta) {
+                    console.error(resposta);
+                });
+        }
+    }
+
 </script>
