@@ -7,11 +7,8 @@ idcodigo int primary key auto_increment,
 codigo_adm char(8)
 );
 
-desc tb_adm;
-
 insert into tb_adm values
 ( 1 , 'XPTO1234');
-
 
 create table tb_cadastro(
 	idcadastro int primary key auto_increment,
@@ -21,8 +18,6 @@ create table tb_cadastro(
     fkcodigo int,
     constraint fkCodigoAdm foreign key (fkcodigo) references tb_adm(idadm)
 );
-
-select * from tb_cadastro;
 
 create table tb_logacesso(
 	idacesso int primary key auto_increment,
@@ -41,6 +36,11 @@ dtPublicacao datetime,
 fkAutor int,
 constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
+select * from tb_transferencias;
+
+update tb_transferencias
+set nome = 'Memphis Depay'
+where id = 7;
 
 create table tb_transferencias(
 id int primary key auto_increment,
@@ -76,10 +76,16 @@ constraint fkUserCurti2 foreign key (fkUser) references tb_cadastro(idcadastro),
 constraint fkPostCurtido2 foreign key (fkPostTransf) references tb_transferencias(id)
 );
 
-select * from tb_transferencias;
-select * from tb_cadastro;
+select count(fkPostTransf) as Usuario from tb_like_transferencias;
 
-select * from tb_like_transferencias;
+SELECT fkPostTransf, COUNT(fkUser) AS total_likes
+FROM tb_like_transferencias
+where fkPostTransf = 2
+GROUP BY fkPostTransf;
+
+SELECT fkPostTransf as "Card Curtidos"
+FROM tb_like_transferencias
+where fkUser = 1;
 
 select idcadastro, id from tb_like_transferencias
 join tb_cadastro on fkUser = idcadastro 

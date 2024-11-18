@@ -264,17 +264,12 @@ function ValidarSessao(){
 }
 
 function limparSessao() {
-  var btnLogin = document.getElementById('button_login');
   var btnSair = document.getElementById('button_sair');
-  var btnSistema = document.getElementById('button_sistema');
   btnSair.innerHTML = `Saindo`;
 
   sessionStorage.clear();
-
+  
   setTimeout(() => {
-    btnLogin.style.display = 'flex';
-    btnSair.style.display = 'none';
-    btnSistema.style.display = 'none';
-    window.location = "index.html";
+    window.location.href = 'index.html';
   }, 1000);
 }
