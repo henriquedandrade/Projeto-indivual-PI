@@ -40,7 +40,67 @@
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
                 <div class="conteudo" id="conteudo" >  
-                    
+                    <div class="container_dashboard">
+
+                        <!-- KPIS -->
+                        <div class="kpis">
+                            <div class="kpi qtd_total_likes">
+                                <span class="titulos_dash">Total de Likes</span>
+                                <div class="centralizar">
+                                    <img src="assets/liked_icon.svg" alt="liked icon" style="height: 30px; width: auto;"> 
+                                    <span class="informacoes">5236</span>
+                                </div>
+
+                            </div>
+
+                            <div class="kpi qtd_total_likes">
+                                <span class="titulos_dash">Total de Notícias</span>
+                                <div class="centralizar">
+                                    <img src="assets/icon news.png" alt="liked icon" style="height: 30px; width: auto;"> 
+                                    <span class="informacoes">5236</span>
+                                </div>
+
+                            </div>
+
+                            <div class="kpi qtd_total_likes">
+                                <span class="titulos_dash">Total de Transfêrencias</span>
+                                <div class="centralizar">
+                                    <img src="assets/icon transf.png" alt="liked icon" style="height: 35px; width: auto;"> 
+                                    <span class="informacoes">5236</span>
+                                </div>
+
+                            </div>
+
+                            <div class="kpi qtd_total_likes">
+                                <span class="titulos_dash">Mais publicou</span>
+                                <div class="centralizar">
+                                    <img src="assets/user_icon.png" alt="liked icon" style="height: 30px; width: auto;"> 
+                                    <span class="informacoes">5236</span>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                        <!-- GRAFICOS -->
+                        <div class="graficos">
+                            <div class="ranking noticias">
+                                <span class="titulos_dash">Ranking Notícias</span>
+                            </div>
+
+                            <div class="grafico1">
+
+                            </div>
+
+                            <div class="ranking transferencias">
+                                <span class="titulos_dash">Ranking Transfêrencias</span>
+
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
                     
                 </div>
             </div>
@@ -143,7 +203,7 @@
     function conteudo_dashboard(){
         var div_principal = document.getElementById('conteudo')
         titulos.innerHTML = `DASHBOARD`;
-        div_principal.innerHTML = ``;      
+        // div_principal.innerHTML = ``;      
 
     }
 
