@@ -178,7 +178,7 @@ a{
     border-radius: 10px;
 }
 
-.qtd_total_likes .centralizar{
+.kpis .centralizar{
     height: 50%;
     width: 100%;
     display: flex;
@@ -186,12 +186,16 @@ a{
     justify-content: center;
 }
 
-.qtd_total_likes .centralizar .informacoes{
+.kpis .centralizar .informacoes{
     height: 30px;
     width: auto;
     display: flex;
     align-items: center;
     margin-left: 5px
+}
+
+#total_noticias{
+    margin-left: 10px;
 }
 
 
@@ -203,22 +207,52 @@ a{
     width: 100%;
     height: 60%;
 }
-
+#myChart{
+    width: 100%;
+}
 .grafico1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    width: 49%;
+    width: 59%;
     background-color: white;
     border-radius: 10px;
-
-
 }
 
+.pizza1{
+    height: 100%;
+    width: 39%;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulos_dash.laterais{
+    height: 15%;
+
+}
 .ranking{
     height: 100%;
     width: 23%;
     background-color: black;
     background-color: white;
     border-radius: 10px;
+}
+
+.ranking.noticias,.transferencias{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.informacoes.laterais{
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(165, 165, 165);
+    width: 80%;
+    margin-bottom: 10px;
 }
 
 

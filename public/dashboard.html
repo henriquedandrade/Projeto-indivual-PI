@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style_sistema.css">
     <link rel="icon" href="assets/favicon.ico" type="Icon pag">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script.js" defer></script>
+    <script src="js/dashboard.js" defer></script>
 
     <title>FutMarket</title>
 </head>
 
-<body>
+<body onload="kpis()">
     <div class="main sistema">
         <div class="container sistema">
             <div class="box menu_lateral">
@@ -40,7 +42,8 @@
             <div class="box telas" id="telas">
                 <span class="titulos" id="titulos"></span>
                 <div class="conteudo" id="conteudo" >  
-                    <div class="container_dashboard">
+
+                    <div class="container_dashboard" >
 
                         <!-- KPIS -->
                         <div class="kpis">
@@ -48,35 +51,35 @@
                                 <span class="titulos_dash">Total de Likes</span>
                                 <div class="centralizar">
                                     <img src="assets/liked_icon.svg" alt="liked icon" style="height: 30px; width: auto;"> 
-                                    <span class="informacoes">5236</span>
+                                    <span class="informacoes" id="qtd_total_likes"></span>
                                 </div>
 
                             </div>
 
-                            <div class="kpi qtd_total_likes">
+                            <div class="kpi total_noticias">
                                 <span class="titulos_dash">Total de Notícias</span>
                                 <div class="centralizar">
                                     <img src="assets/icon news.png" alt="liked icon" style="height: 30px; width: auto;"> 
-                                    <span class="informacoes">5236</span>
+                                    <span class="informacoes" id="total_noticias"></span>
                                 </div>
 
                             </div>
 
-                            <div class="kpi qtd_total_likes">
+                            <div class="kpi total_transferencias">
                                 <span class="titulos_dash">Total de Transfêrencias</span>
                                 <div class="centralizar">
                                     <img src="assets/icon transf.png" alt="liked icon" style="height: 35px; width: auto;"> 
-                                    <span class="informacoes">5236</span>
+                                    <span class="informacoes" id="total_transferencias"></span>
                                 </div>
 
                             </div>
 
-                            <div class="kpi qtd_total_likes">
+                            <div class="kpi mais_publicou">
                                 <span class="titulos_dash">Mais publicou</span>
                                 <div class="centralizar">
-                                    <img src="assets/user_icon.png" alt="liked icon" style="height: 30px; width: auto;"> 
-                                    <span class="informacoes">5236</span>
-                                </div>
+                                    <!-- <img src="assets/user_icon.png" alt="liked icon" style="height: 30px; width: auto;">  -->
+                                    <span class="informacoes" id="mais_publicou" style="height: auto; width: auto; display: flex; flex-direction: column; align-items: center; gap: 5px;"></span>
+                                </div> 
 
                             </div>
                             
@@ -84,18 +87,20 @@
 
                         <!-- GRAFICOS -->
                         <div class="graficos">
-                            <div class="ranking noticias">
-                                <span class="titulos_dash">Ranking Notícias</span>
-                            </div>
+                            
 
+
+                            
                             <div class="grafico1">
+                                <canvas id="myChart_1" width="400px" height="250px"></canvas>
+                                
 
                             </div>
 
-                            <div class="ranking transferencias">
-                                <span class="titulos_dash">Ranking Transfêrencias</span>
-
+                            <div class="pizza1">
+                                <canvas id="myChart_2" width="100%" height="100%"></canvas>
                             </div>
+
                             
 
                         </div>
@@ -401,4 +406,69 @@
         })
     }
 
+    function kpis(){
+        fetch("/dashboard/total_likes").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {                    
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    qtd_total_likes.innerHTML = `${resposta[0].Total_de_Likes}`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+                console.error(resposta);
+        });
+
+        fetch("/dashboard/total_noticias").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {                    
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    total_noticias.innerHTML = `${resposta[0].total_noti}`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+                console.error(resposta);
+        });
+
+        fetch("/dashboard/total_transferencias").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {                    
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    total_transferencias.innerHTML = `${resposta[0].total_transf}`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+                console.error(resposta);
+        });
+
+        fetch("/dashboard/mais_publicacoes").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {                    
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    mais_publicou.innerHTML = `<span style="font-weight: bold; font-size: 22px;">${resposta[0].Nome}</span> <span>${resposta[0].total_publicacao} publicações</span>`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+                console.error(resposta);
+        });
+    }
 </script>
