@@ -357,6 +357,16 @@
     }
 
     function publicar_noticia() {
+        var assunto = ipt_assunto_noticia.value
+        var palavra = ipt_palavras_chaves.value
+        var texto = ipt_texto_noticia.value
+        console.log(assunto)
+
+        if( assunto == "" || palavra == "" || texto == ""){
+            alert("Preencha todos os campos!")
+            return false
+        }
+
         var Datetime_sql = ObterDateTime()    
         const formData = new FormData();
         formData.append('foto', foto.files[0])
@@ -384,6 +394,21 @@
     }
 
     function publicar_transf(){
+        var posicao = slt_posicao.value
+        var name = ipt_name.value
+        var dtnasc = ipt_dtnasc.value
+        var nacionalidade = ipt_nacionalidade.value
+        var contrato = ipt_contrato.value
+        var salario = ipt_salario.value
+        var valor = ipt_valor.value
+        var status = slt_status.value
+
+        if ( posicao == "" || name == "" || dtnasc == "" || nacionalidade == "" || contrato == "" || salario == "" || valor == "" || status == ""){
+            alert("Preencha todos os campos!")
+            return false
+        }
+
+
         var Datetime_sql = ObterDateTime()    
 
         const formData = new FormData();
