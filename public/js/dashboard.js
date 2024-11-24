@@ -132,7 +132,7 @@ function gerarGrafico2(){
         },
         ticks: {
           font: {
-            size: 14, // Tamanho da fonte dos rótulos
+            size: 20, // Tamanho da fonte dos rótulos
             family: 'Roboto',
             weight: 'bold'
           },
