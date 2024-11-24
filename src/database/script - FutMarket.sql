@@ -36,11 +36,7 @@ dtPublicacao datetime,
 fkAutor int,
 constraint FkAutorPublica foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
-select * from tb_transferencias;
 
-update tb_transferencias
-set nome = 'Memphis Depay'
-where id = 7;
 
 create table tb_transferencias(
 id int primary key auto_increment,
@@ -60,6 +56,21 @@ fkAutor int,
 constraint fkAutorTransfere foreign key (fkAutor) references tb_cadastro(idcadastro)
 );
 
+select cad.username as Nome, (ifnull(count(distinct noti.idnoticia), 0) + ifnull(count(distinct transf.id), 0)) as total_publicacao
+from tb_cadastro as cad
+left join tb_noticias as noti 
+on noti.fkAutor = cad.idcadastro
+left join tb_transferencias as transf 
+on transf.fkAutor = cad.idcadastro
+group by cad.username
+order by total_publicacao desc;
+
+select (select COUNT(*) from tb_like_noticias) + (select COUNT(*) from tb_like_transferencias) as "Total de Likes";
+
+
+select count(idnoticia) from tb_noticias;
+select count(id) from tb_transferencias;
+
 create table tb_like_noticias(
 fkUser int,
 fkPostNoti int,
@@ -67,6 +78,30 @@ constraint pkCompostaNoticias primary key( fkUser, fkPostNoti),
 constraint fkUserCurti1 foreign key (fkUser) references tb_cadastro(idcadastro),
 constraint fkPostCurtido1 foreign key (fkPostNoti) references tb_noticias(idnoticia)
 );
+
+SELECT DATE(horapublicacao) AS Dia, COUNT(*) AS total_publicacoes FROM tb_transferencias
+GROUP BY dia
+ORDER BY dia;
+
+SELECT DATE(dtPublicacao) AS Dia, COUNT(*) AS total_publicacoes FROM tb_noticias
+GROUP BY dia
+ORDER BY dia;
+
+SELECT 'Notícia' AS tipo,
+n.idnoticia AS id_publicacao,
+n.assunto AS titulo,
+COUNT(ln.fkPostNoti) AS qtd_curtidas
+FROM tb_noticias n
+LEFT JOIN tb_like_noticias ln ON n.idnoticia = ln.fkPostNoti
+GROUP BY n.idnoticia, n.assunto
+UNION ALL SELECT 'Transferência' AS tipo,
+t.id AS id_publicacao,
+t.nome AS titulo,
+COUNT(lt.fkPostTransf) AS qtd_curtidas
+FROM tb_transferencias t
+LEFT JOIN tb_like_transferencias lt ON t.id = lt.fkPostTransf
+GROUP BY t.id, t.nome
+ORDER BY qtd_curtidas DESC;
 
 create table tb_like_transferencias(
 fkUser int,

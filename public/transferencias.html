@@ -134,6 +134,15 @@ function atualizarTransferenciasRecentes() {
                         var horapublicacao =  publicacao.horapublicacao;
                         var username =  publicacao.username; 
 
+                        var valorMercado = valorMercado.toString();
+                        var tamanho_valor = valorMercado.length;
+                        
+                        if( tamanho_valor > 3){
+                          valorMercado = `${valorMercado[0]},${valorMercado[1]} bilhões`;
+                        } else {
+                          valorMercado = `${valorMercado} milhões`
+                        }
+
                         var idade = calcularIdade(dtNasc)
 
                         var dataLocal = new Date(horapublicacao);
@@ -172,7 +181,7 @@ function atualizarTransferenciasRecentes() {
                                                             <span>R$ ${salario} milhões</span>
 
                                                             <span class="infos_titulos">Valor de Mercado</span>
-                                                            <span>R$ ${valorMercado} milhoes</span>
+                                                            <span>R$ ${valorMercado}</span>
 
                                                           </div>
 
