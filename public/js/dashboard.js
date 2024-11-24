@@ -1,144 +1,157 @@
-const ctx1 = document.getElementById('myChart_1').getContext('2d');
-const ctx2 = document.getElementById('myChart_2').getContext('2d');
+function gerarGrafico1(){
+  const ctx1 = document.getElementById('myChart_1').getContext('2d');
 
-const data1 = {
-  labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-  datasets: [{
-    data: [2, 5, 9, 6, 7, 12, 15],
-    fill: true, // Preencher abaixo da linha
-    tension: 0.4 // Suaviza a curva da linha
-  }]
-};
+  const data1 = {
+    labels: [],
+    datasets: [{
+      data: [],
+      fill: true, // Preencher abaixo da linha
+      tension: 0.4
+    }]
+  };
 
-// Configurações do gráfico
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: 'top'
-    },
-    title: {
-      display: true,
-      text: 'Time line de Publicações',
-      font: {
-        size: 24, // Tamanho da fonte
-        family: 'Roboto', // Fonte da legenda
-        weight: 'bold' // Estilo da fonte (negrito)
+  // Configurações do gráfico
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: 'top'
       },
-      color: 'black',
+    
+    },
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Dias',
+          font: {
+            size: 16, // Tamanho da fonte
+            family: 'Roboto', // Fonte da legenda
+            weight: 'bold' // Estilo da fonte (negrito)
+          },
+          color: 'black'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Quantidade',
+          font: {
+            size: 16, // Tamanho da fonte
+            family: 'Roboto', // Fonte da legenda
+            weight: 'bold' // Estilo da fonte (negrito)
+          },
+          color: 'black'
+        }
+      }
+    }
+  };
+
+  // Criando o gráfico de linha
+  chart1 = new Chart(ctx1, {
+    type: 'line', // Define o tipo como "line"
+    data: data1,
+    options: options
+  });
+  grafico_linha(1)
+}
+
+
+function gerarGrafico2(){
+  const ctx2 = document.getElementById('myChart_2').getContext('2d');
+
+  const data2 = {
+    labels: ['1º', '2º', '3º', '4º', '5º'], // Rótulos do eixo Y (ranking)
+    datasets: [{
+      data: [12, 19, 3, 5, 7], // Valores das barras
+      backgroundColor: [
+        '#00FF00',  // Verde
+        '#33CC33',  // Verde claro
+        '#66B266',  // Verde amarelado
+        '#FF8000',  // Laranja
+        '#FFA500'   // Laranja claro
+      ],
+      borderColor: [
+        '#00CC00',  // Verde escuro
+        '#299929',  // Verde claro escuro
+        '#4C9A4C',  // Verde-amarelado escuro
+        '#E67300',  // Laranja escuro
+        '#E59400'   // Laranja mais escuro
+      ],
+      borderWidth: 1,
+      titles: [] // Títulos dinâmicos
+    }]
+  };
+  
+  // Configurações do gráfico
+  const barOptions = {
+    responsive: true,
+    indexAxis: 'y', // Define o gráfico como horizontal
+    plugins: {
+      legend: {
+        display: false, // Oculta a legenda do dataset
+      },
       tooltip: {
-        enabled: true, // Habilita o tooltip (padrão)
         callbacks: {
-          label: function (context) {
-            return `Quantidade: ${context.raw}`; // Texto exibido no tooltip
+          label: function(context) {
+            const index = context.dataIndex; // Índice da barra atual
+            const dataset = context.dataset; // Dataset associado
+            const title = dataset.titles[index]; // Obtém o título correspondente
+            const value = context.raw; // Obtém o valor correspondente
+  
+            // Retorna o título e o valor formatados
+            return `${title}: ${value}`;
           }
         }
       }
-
-    }
-  },
-  scales: {
-    x: {
-      title: {
-        display: true,
-        text: 'Dias',
-        font: {
-          size: 16, // Tamanho da fonte
-          family: 'Roboto', // Fonte da legenda
-          weight: 'bold' // Estilo da fonte (negrito)
-        },
-        color: 'black'
-      }
     },
-    y: {
-      beginAtZero: true,
-      title: {
-        display: true,
-        text: 'Quantidade',
-        font: {
-          size: 16, // Tamanho da fonte
-          family: 'Roboto', // Fonte da legenda
-          weight: 'bold' // Estilo da fonte (negrito)
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Quantidade', // Título do eixo X
+          font: {
+            size: 16, // Tamanho da fonte
+            family: 'Roboto', // Fonte
+            weight: 'bold' // Negrito
+          },
+          color: 'black'
         },
-        color: 'black'
+        beginAtZero: true // Inicia no zero
+      },
+      y: {
+        title: { // Título do eixo Y
+          font: {
+            size: 16,
+            family: 'Roboto',
+            weight: 'bold'
+          },
+          color: 'black'
+        },
+        ticks: {
+          font: {
+            size: 14, // Tamanho da fonte dos rótulos
+            family: 'Roboto',
+            weight: 'bold'
+          },
+          color: 'black' // Cor dos rótulos
+        }
       }
     }
-  }
-};
-
-// Criando o gráfico de linha
-new Chart(ctx1, {
-  type: 'line', // Define o tipo como "line"
-  data: data1,
-  options: options
-});
-
-
-
+  };
+  
+  // Criação do gráfico
+  chart2 = new Chart(ctx2, {
+    type: 'bar', // Tipo de gráfico
+    data: data2,
+    options: barOptions // Configurações do gráfico
+  });
+  grafico_bar()
+}
 
 
 
 
 
-
-
-
-    // Configura os dados do gráfico
-    const data2 = {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-      datasets: [{
-        label: 'Preferências de Cores',
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.7)',
-          'rgba(54, 162, 235, 0.7)',
-          'rgba(255, 206, 86, 0.7)',
-          'rgba(75, 192, 192, 0.7)',
-          'rgba(153, 102, 255, 0.7)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)'
-        ],
-        borderWidth: 1
-      }]
-    };
-
-    // Configurações do Gráfico de Rosca
-    const doughnutOptions = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom'
-        },
-        title: {
-          display: true,
-          text: 'Gráfico de Rosca'
-        }
-      }
-    };
-
-    // Configurações do Gráfico de Pizza
-    const pieOptions = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'right'
-        },
-        title: {
-          display: true,
-          text: 'Gráfico de Pizza'
-        }
-      }
-    };
-
-    // Criação do Gráfico de Rosca
-    new Chart(ctx2, {
-      type: 'doughnut',
-      data: data2,
-      options: doughnutOptions
-    });

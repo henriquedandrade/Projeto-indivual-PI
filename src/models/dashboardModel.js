@@ -44,8 +44,53 @@ function listar_noticias_e_transf() {
     return database.executar(instrucaoSql);
 }
 
+function qtd_publicacoes_noticias(){
+    var instrucaoSql = `
+    SELECT DATE(horapublicacao) AS dia, COUNT(*) AS total_publicacoes FROM tb_transferencias
+    GROUP BY dia
+    ORDER BY dia desc;
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function qtd_publicacoes_transferencias(){
+    var instrucaoSql = `
+    SELECT DATE(dtPublicacao) AS dia, COUNT(*) AS total_publicacoes FROM tb_noticias
+    GROUP BY dia
+    ORDER BY dia desc;
+    `;
+    return database.executar(instrucaoSql);
+}
+
+function grafico_bar(){
+    var instrucaoSql = `
+   SELECT 'Notícia' AS tipo,
+    n.idnoticia AS id_publicacao,
+    n.assunto AS titulo,
+    COUNT(ln.fkPostNoti) AS qtd_curtidas
+    FROM tb_noticias n
+    LEFT JOIN tb_like_noticias ln ON n.idnoticia = ln.fkPostNoti
+    GROUP BY n.idnoticia, n.assunto
+    UNION ALL SELECT 'Transferência' AS tipo,
+    t.id AS id_publicacao,
+    t.nome AS titulo,
+    COUNT(lt.fkPostTransf) AS qtd_curtidas
+    FROM tb_transferencias t
+    LEFT JOIN tb_like_transferencias lt ON t.id = lt.fkPostTransf
+    GROUP BY t.id, t.nome
+    ORDER BY qtd_curtidas DESC
+    LIMIT 5;
+    `;
+
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = { total_likes,
                    total_noticias,
                    total_transferencias,
-                   listar_noticias_e_transf
+                   listar_noticias_e_transf,
+                   qtd_publicacoes_noticias,
+                   qtd_publicacoes_transferencias,
+                   grafico_bar
                 }

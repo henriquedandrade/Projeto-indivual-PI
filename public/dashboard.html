@@ -13,7 +13,7 @@
     <title>FutMarket</title>
 </head>
 
-<body onload="kpis()">
+<body onload="kpis() , gerarGrafico1(), gerarGrafico2()">
     <div class="main sistema">
         <div class="container sistema">
             <div class="box menu_lateral">
@@ -92,13 +92,22 @@
 
                             
                             <div class="grafico1">
-                                <canvas id="myChart_1" width="400px" height="250px"></canvas>
-                                
+                                <span class="titulos_dash grafico1">Time-line de Publicações</span>
+                                <div class="filtros">
+                                    <button id="filtroNoticias" class="button_grafico1" onclick="grafico_linha(1)">Notícias</button>
+                                    <button id="filtroCards" class="button_grafico1" onclick="grafico_linha(2)">Transfêrencias</button>           
+                                </div>
+
+                                <canvas id="myChart_1" width="400px" height="195px" style="margin-top: 0px;"></canvas>
 
                             </div>
 
                             <div class="pizza1">
-                                <canvas id="myChart_2" width="100%" height="100%"></canvas>
+                                <span class="titulos_dash grafico1">Mais curtidos</span>
+                                <div class="grafico_pizza">
+                                    <canvas id="myChart_2" width="420px" height="340px" style="padding: 0; margin: 0; "></canvas>
+                                </div>
+
                             </div>
 
                             
@@ -463,6 +472,118 @@
                 resposta.json().then(function (resposta) {
                     // console.log("Dados recebidos: ", JSON.stringify(resposta));
                     mais_publicou.innerHTML = `<span style="font-weight: bold; font-size: 22px;">${resposta[0].Nome}</span> <span>${resposta[0].total_publicacao} publicações</span>`;
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+            }).catch(function (resposta) {
+                console.error(resposta);
+        });
+    }
+   
+    function grafico_linha(parametro){
+        var btn_noticias = document.getElementById("filtroNoticias")
+        var btn_transferencias = document.getElementById("filtroCards")
+
+        if( parametro == 1 ){
+            btn_noticias.style.border = '2px solid black'; // Borda de 3px sólida vermelha
+            btn_noticias.style.backgroundColor = 'white'; // Cor do plano de fundo amarela
+            btn_noticias.style.color = 'red'; 
+            
+            btn_transferencias.style.border = '2px solid black'; // Borda de 3px sólida vermelha
+            btn_transferencias.style.backgroundColor = 'black'; // Cor do plano de fundo amarela
+            btn_transferencias.style.color = 'white'; // Cor da fonte azul
+        } else if( parametro == 2){
+            btn_noticias.style.border = '2px solid black'; // Borda de 3px sólida vermelha
+            btn_noticias.style.backgroundColor = 'black'; // Cor do plano de fundo amarela
+            btn_noticias.style.color = 'white'; 
+
+            btn_transferencias.style.border = '2px solid black'; // Borda de 3px sólida vermelha
+            btn_transferencias.style.backgroundColor = 'white'; // Cor do plano de fundo amarela
+            btn_transferencias.style.color = 'red'; 
+        }
+
+        var parametroVar = parametro
+        console.log(parametroVar)
+        const ctx1 = document.getElementById('myChart_1').getContext('2d');
+        fetch("/dashboard/qtd_publicacoes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                parametroServer: parametroVar
+            })
+        }).then(function (resposta) {
+                            if (resposta.ok) {
+                                if (resposta.status == 204) {                    
+                                    throw "Nenhum resultado encontrado!!";
+                                    return 0;
+                                }
+                                resposta.json().then(function (resposta) {
+                                    // console.log("Dados recebidos html: ", JSON.stringify(resposta));
+
+                                    var dias =[]
+                                    var quantidades =[]
+
+                                    for (var contador = 0; contador < 6; contador++) {
+                                        var dia_selecionado = resposta[contador];
+
+                                        var data = new Date(dia_selecionado.dia)
+                                        var dataFormatada = data.toLocaleDateString('pt-BR');
+
+                                        var dia = data.getDate();   
+                                        var mes = data.getMonth() + 1;
+
+                                        var dia_mes = `${dia}/${mes}`;
+                                        dias.push(dia_mes)
+
+                                        var qtd_publi= dia_selecionado.total_publicacoes;
+                                        quantidades.push(qtd_publi)
+                                    }
+
+                                    chart1.data.labels = dias; 
+                                    chart1.data.datasets[0].data = quantidades; 
+                                    chart1.update(); 
+                                    
+                                });
+                            } else {
+                                throw ('Houve um erro na API!');
+                            }
+                            }).catch(function (resposta) {
+                                console.error(resposta);
+                        });                        
+    }
+
+    function grafico_bar(){
+        var lista_titulo =[];
+        var lista_qtd =[];
+        
+        fetch("/dashboard/grafico_bar").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {                    
+                    throw "Nenhum resultado encontrado!!";
+                }
+                resposta.json().then(function (resposta) {
+                    // console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    for (var cont = 0; cont < 5; cont++) {
+                        var publicacao = resposta[cont];
+
+                        var titulo = `Notícia ${publicacao.titulo}`;    
+
+                        if( publicacao.tipo == "Transferência"){
+                            var titulo = `Card ${publicacao.titulo}`;
+                        }
+                        
+                        var quantidade = publicacao.qtd_curtidas;
+
+                        lista_titulo.push(titulo)
+                        lista_qtd.push(quantidade)   
+                        
+                    }
+                    chart2.data.datasets[0].titles = lista_titulo;
+                    chart2.data.datasets[0].data = lista_qtd;  // Atualize os dados com lista_qtd
+                    chart2.update();
                 });
             } else {
                 throw ('Houve um erro na API!');
