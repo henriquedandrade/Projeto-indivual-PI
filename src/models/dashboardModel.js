@@ -48,7 +48,8 @@ function qtd_publicacoes_noticias(){
     var instrucaoSql = `
     SELECT DATE(horapublicacao) AS dia, COUNT(*) AS total_publicacoes FROM tb_transferencias
     GROUP BY dia
-    ORDER BY dia desc;
+    ORDER BY dia desc
+    LIMIT 7;
     `;
     return database.executar(instrucaoSql);
 }
@@ -57,7 +58,8 @@ function qtd_publicacoes_transferencias(){
     var instrucaoSql = `
     SELECT DATE(dtPublicacao) AS dia, COUNT(*) AS total_publicacoes FROM tb_noticias
     GROUP BY dia
-    ORDER BY dia desc;
+    ORDER BY dia desc
+    LIMIT 7;
     `;
     return database.executar(instrucaoSql);
 }

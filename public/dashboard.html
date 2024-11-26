@@ -196,8 +196,8 @@
                             <div class="grafico1">
                                 <span class="titulos_dash grafico1">Time-line de Publicações</span>
                                 <div class="filtros">
-                                    <button id="filtroNoticias" class="button_grafico1" onclick="grafico_linha(1)">Notícias</button>
-                                    <button id="filtroCards" class="button_grafico1" onclick="grafico_linha(2)">Transfêrencias</button>           
+                                    <button id="filtroNoticias" class="button_grafico1" onclick="grafico_linha(1)">Transfêrencias</button>
+                                    <button id="filtroCards" class="button_grafico1" onclick="grafico_linha(2)">Notícias</button>           
                                 </div>
 
                                 <canvas id="myChart_1" width="400px" height="195px" style="margin-top: 0px;"></canvas>
@@ -553,7 +553,7 @@
                                     var dias =[]
                                     var quantidades =[]
 
-                                    for (var contador = 0; contador < 7; contador++) {
+                                    for (var contador = 6; contador >= 0; contador--) {
                                         var dia_selecionado = resposta[contador];
 
                                         var data = new Date(dia_selecionado.dia)
@@ -563,6 +563,7 @@
                                         var mes = data.getMonth() + 1;
 
                                         var dia_mes = `${dia}/${mes}`;
+                                        console.log(dia_mes)
                                         dias.push(dia_mes)
 
                                         var qtd_publi= dia_selecionado.total_publicacoes;
