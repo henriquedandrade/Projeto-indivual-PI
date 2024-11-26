@@ -30,7 +30,7 @@
                     <a onclick="opcao_escolhida('noticias_opcao')" class="text opcoes_text"
                         id="noticias_opcao">Notícias</a>
                     <a onclick="opcao_escolhida('transferencias_opcao')" class="text opcoes_text"
-                        id="transferencias_opcao">Tranfêrencias</a>
+                        id="transferencias_opcao">Tranferências</a>
                 </div>
                 
                 <div class="buttons">
@@ -168,7 +168,7 @@
                             </div>
 
                             <div class="kpi total_transferencias">
-                                <span class="titulos_dash">Total de Transfêrencias</span>
+                                <span class="titulos_dash">Total de Transferências</span>
                                 <div class="centralizar">
                                     <img src="assets/icon transf.png" alt="liked icon" style="height: 35px; width: auto;"> 
                                     <span class="informacoes" id="total_transferencias"></span>
@@ -196,7 +196,7 @@
                             <div class="grafico1">
                                 <span class="titulos_dash grafico1">Time-line de Publicações</span>
                                 <div class="filtros">
-                                    <button id="filtroNoticias" class="button_grafico1" onclick="grafico_linha(1)">Transfêrencias</button>
+                                    <button id="filtroNoticias" class="button_grafico1" onclick="grafico_linha(1)">Transferências</button>
                                     <button id="filtroCards" class="button_grafico1" onclick="grafico_linha(2)">Notícias</button>           
                                 </div>
 
@@ -258,7 +258,7 @@
 
     function conteudo_transferencias(){
         var div_principal = document.getElementById('conteudo')
-        titulos.innerHTML = `PUBLICAR TRANSFÊRENCIA`;   
+        titulos.innerHTML = `PUBLICAR TRANSFERÊNCIA`;   
         
         div_principal.innerHTML = `<div class="card">                
                         <div class="card_ipt_imagem">
@@ -287,7 +287,7 @@
                                 
                                 <input type="text" id="ipt_name" class="input_transferencias transferencias" placeholder="Nome e Sobrenome">
 
-                                <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Dt. de Nasc.">
+                                <input type="text" id="ipt_dtnasc" class="input_transferencias dtnasc" placeholder="Dt. de Nasc." maxlength="10">
 
                                 <div id="ipt_bandeira" class="input_transferencias bandeira"></div>
 
@@ -327,7 +327,7 @@
                                 <input class="input_transferencias digite" type="text" placeholder="Digite aqui.." id="ipt_salario">
     
                                 <span class="titulo_input"> Valor de Mercado (R$)</span>
-                                <input class="input_transferencias digite"type="text" placeholder="Digite aqui.." id="ipt_valor">
+                                <input class="input_transferencias digite"type="text" placeholder="Em milhões" id="ipt_valor">
                             </div>
                         </div>
 
@@ -403,9 +403,20 @@
         var valor = ipt_valor.value
         var status = slt_status.value
 
+        var dia = dtnasc.slice(0, 2);
+        var mes = dtnasc.slice(3, 5);
+        var ano = dtnasc.slice(6, 10);
+        var dtFormatada = `${ano }-${mes}-${dia}`;
+        console.log("Data: ",dtFormatada)
+
         if ( posicao == "" || name == "" || dtnasc == "" || nacionalidade == "" || contrato == "" || salario == "" || valor == "" || status == ""){
             alert("Preencha todos os campos!")
             return false
+        }
+
+        if( dtnasc.includes("/")){
+            alert("Corrija o formato do campo: DATA DE NASCIMENTO")
+
         }
 
 
@@ -415,7 +426,7 @@
         formData.append("foto_perfil" ,foto_perfil.files[0]);
         formData.append("posicao" ,slt_posicao.value);
         formData.append("name" ,ipt_name.value);
-        formData.append("dtnasc" ,ipt_dtnasc.value);
+        formData.append("dtnasc" ,dtFormatada);
         formData.append("nacionalidade" ,ipt_nacionalidade.value);
         formData.append("contrato" ,ipt_contrato.value);
         formData.append("salario" ,ipt_salario.value);
