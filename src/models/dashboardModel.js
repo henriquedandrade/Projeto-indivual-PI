@@ -66,7 +66,7 @@ function qtd_publicacoes_transferencias(){
 
 function grafico_bar(){
     var instrucaoSql = `
-   SELECT 'Notícia' AS tipo,
+    SELECT 'Notícia' AS tipo,
     n.idnoticia AS id_publicacao,
     n.assunto AS titulo,
     COUNT(ln.fkPostNoti) AS qtd_curtidas
@@ -83,7 +83,6 @@ function grafico_bar(){
     ORDER BY qtd_curtidas DESC
     LIMIT 5;
     `;
-
     return database.executar(instrucaoSql);
 }
 

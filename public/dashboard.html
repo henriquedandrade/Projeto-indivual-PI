@@ -408,49 +408,50 @@
         var ano = dtnasc.slice(6, 10);
         var dtFormatada = `${ano }-${mes}-${dia}`;
         console.log("Data: ",dtFormatada)
+        console.log(dtnasc  )
 
         if ( posicao == "" || name == "" || dtnasc == "" || nacionalidade == "" || contrato == "" || salario == "" || valor == "" || status == ""){
             alert("Preencha todos os campos!")
             return false
-        }
-
-        if( dtnasc.includes("/")){
+        }else if( !dtnasc.includes('/')){
             alert("Corrija o formato do campo: DATA DE NASCIMENTO")
-
+            return false
+        }else if (!foto_perfil.files[0] || !foto_atual.files[0] || !foto_futuro.files[0]) {
+            alert("Por favor, insira todas as fotos!");
+            return false;
+        } else{
+            var Datetime_sql = ObterDateTime()    
+    
+            const formData = new FormData();
+            formData.append("foto_perfil" ,foto_perfil.files[0]);
+            formData.append("posicao" ,slt_posicao.value);
+            formData.append("name" ,ipt_name.value);
+            formData.append("dtnasc" ,dtFormatada);
+            formData.append("nacionalidade" ,ipt_nacionalidade.value);
+            formData.append("contrato" ,ipt_contrato.value);
+            formData.append("salario" ,ipt_salario.value);
+            formData.append("valor" ,ipt_valor.value);
+            formData.append("foto_atual" ,foto_atual.files[0]);
+            formData.append("foto_futuro" ,foto_futuro.files[0]);
+            formData.append("status" ,slt_status.value);
+            formData.append('datetime', Datetime_sql);
+            formData.append('id', sessionStorage.ID_USUARIO);
+    
+            fetch("/publicacao/publicar_transferencia", {
+            method: "POST",
+            body: formData
+            })
+            .then(res => {
+                var btnPublicar = document.getElementById("btn-publicar");
+                btnPublicar.innerHTML='Publicado';
+                setTimeout(() => {
+                    conteudo_transferencias();
+                }, "2000");
+            })
+            .catch(err => {
+                console.log('Erro HTML:', err);
+            })
         }
-
-
-        var Datetime_sql = ObterDateTime()    
-
-        const formData = new FormData();
-        formData.append("foto_perfil" ,foto_perfil.files[0]);
-        formData.append("posicao" ,slt_posicao.value);
-        formData.append("name" ,ipt_name.value);
-        formData.append("dtnasc" ,dtFormatada);
-        formData.append("nacionalidade" ,ipt_nacionalidade.value);
-        formData.append("contrato" ,ipt_contrato.value);
-        formData.append("salario" ,ipt_salario.value);
-        formData.append("valor" ,ipt_valor.value);
-        formData.append("foto_atual" ,foto_atual.files[0]);
-        formData.append("foto_futuro" ,foto_futuro.files[0]);
-        formData.append("status" ,slt_status.value);
-        formData.append('datetime', Datetime_sql);
-        formData.append('id', sessionStorage.ID_USUARIO);
-
-        fetch("/publicacao/publicar_transferencia", {
-        method: "POST",
-        body: formData
-        })
-        .then(res => {
-            var btnPublicar = document.getElementById("btn-publicar");
-            btnPublicar.innerHTML='Publicado';
-            setTimeout(() => {
-                conteudo_transferencias();
-          }, "2000");
-        })
-        .catch(err => {
-            console.log('Erro HTML:', err);
-        })
     }
 
     function kpis(){
